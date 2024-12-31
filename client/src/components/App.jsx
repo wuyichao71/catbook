@@ -2,7 +2,7 @@ import React from "react";
 import NavBar from "./modules/NavBar";
 import Profile from "./pages/Profile";
 // TODO (step0): import Feed
-// TODO (step5): import Router and NotFound
+// TODO (step5): import Outlet
 
 // To use styles, import the necessary CSS files
 import "../utilities.css";
@@ -20,7 +20,7 @@ const App = () => {
       <div className="App-container">
         <Profile />
         {/* TODO (step0): render Feed instead of Profile */}
-        {/* TODO (step5): use Router to route between pages */}
+        {/* TODO (step5): use Outlet to route between pages */}
       </div>
     </>
   );
