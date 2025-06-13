@@ -1,5 +1,6 @@
 import React from "react";
-
+import "./Card.css";
+import { Link } from "react-router-dom";
 // TODO (ste12): import Card.css
 
 /**
@@ -10,11 +11,13 @@ import React from "react";
  * @param {string} creator_name
  * @param {string} content of the story
  */
-const SingleStory = () => {
+const SingleStory = (props) => {
   return (
     <div className="Card-story">
-      This is a SingleStory!
-      {/* TODO (step1): use JSX and props to render story creator and content */}
+      <Link to="/profile" className="u-link u-bold">
+        {props.creator_name}
+      </Link>
+      <p className="Card-storyContent">{props.content}</p>
     </div>
   );
 };

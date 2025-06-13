@@ -10,7 +10,7 @@ export default defineConfig({
     outDir: path.resolve(__dirname, 'client/dist'), // Output directory for production build
   },
   server: {
-    port: 5173,
+    port: 5174,
     proxy: {
       '/api': {
         target: "http://localhost:3000",
