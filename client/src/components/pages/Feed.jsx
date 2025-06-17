@@ -3,19 +3,26 @@ import React, { useEffect, useState } from "react";
 import SingleStory from "../modules/SingleStory";
 import { NewStory } from "../modules/NewPostInput";
 import Card from "../modules/Card";
-import { get } from "../../utilities";
+import { get, post } from "../../utilities";
 // TODO (step4): import NewStory
 // TODO (step6): remove SingleStory import, import Card
 
 const Feed = () => {
   // TODO (step2): define state called "stories" to hold stories
   const [stories, setStories] = useState([]);
-  const [words, setWords] = useState([]);
+  // const [words, setWords] = useState([]);
   // TODO (step4): implement a callback function addNewStory that adds a
   // new story to the stories state
 
   const addNewStory = (value) => {
-    setStories(stories.concat(value));
+    // setStories(stories.concat(value));
+    post("/api/story", value)
+      .then((storyObj) => {
+        setStories([storyObj].concat(stories));
+      })
+      .catch((error) => {
+        console.error("Error adding new story:", error);
+      });
   };
 
   useEffect(() => {
@@ -26,14 +33,10 @@ const Feed = () => {
     //   creator_name: "creator name",
     //   content: "story content",
     // }
-    get("/api/stories")
-      .then((storiesList) => {
-        storiesList.reverse();
-        return storiesList;
-      })
-      .then((storiesList) => {
-        setStories(storiesList);
-      });
+    get("/api/stories").then((res) => {
+      const reversedStories = res.reverse();
+      setStories(reversedStories);
+    });
   }, []);
 
   return (
@@ -42,7 +45,7 @@ const Feed = () => {
       {stories.length !== 0 ? (
         stories.map((storyObj, idx) => (
           <Card
-            key={`SingleStory_${idx}`}
+            key={`SingleStory_${stories.length - idx}`}
             _id={storyObj._id}
             creator_name={storyObj.creator_name}
             content={storyObj.content}

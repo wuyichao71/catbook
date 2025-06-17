@@ -27,7 +27,10 @@ const Card = (props) => {
   // new comment to the comments state
   const addNewComment = (value) => {
     // post("/api/comment", { content: value, parent: props._id });
-    setComments(comments.concat(value));
+    // setComments(comments.concat(value));
+    post("/api/comment", value).then((commentObj) => {
+      setComments(comments.concat(commentObj));
+    });
   };
 
   useEffect(() => {
@@ -39,8 +42,8 @@ const Card = (props) => {
     //   parent: "parent story id",
     //   content: "story content",
     // }
-    get("/api/comment", { parent: props._id }).then((commentsList) => {
-      setComments(commentsList);
+    get("/api/comments", { parent: props._id }).then((comments) => {
+      setComments(comments);
     });
   }, []);
 

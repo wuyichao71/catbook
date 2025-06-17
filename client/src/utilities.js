@@ -1,4 +1,4 @@
-const BASE_URL = "https://catbook-5bwk.onrender.com";
+const BASE_URL = "";
 
 const formatParams = (params) => {
   return Object.keys(params)

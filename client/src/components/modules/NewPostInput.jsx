@@ -40,16 +40,25 @@ const NewPostInput = (props) => {
 
 const NewStory = (props) => {
   const addStory = (value) => {
+    const id = "id" + Math.random().toString(16).slice(2);
     props.addNewStory &&
-      props.addNewStory({ _id: "random_id", creator_name: "Anonymous User", content: value });
+      props.addNewStory({ _id: id, creator_name: "Anonymous User", content: value });
   };
+
   return <NewPostInput defaultText="What's on your mind?" onSubmit={addStory} />;
 };
 
 const NewComment = (props) => {
   const addComment = (value) => {
-    // props.addNewComment && props.addNewComment({_id: "random_id", creator_name: 'Anonymous User', content: value, parent: props.storyId});
-    post("/api/comment", { content: value, parent: props.storyId });
+    const id = "commentid" + Math.random().toString(16).slice(2);
+    props.addNewComment &&
+      props.addNewComment({
+        _id: id,
+        creator_name: "Anonymous User",
+        content: value,
+        parent: props.storyId,
+      });
+    // post("/api/comment", { content: value, parent: props.storyId });
   };
   return <NewPostInput defaultText="New Comment" onSubmit={addComment} />;
 };
