@@ -24,7 +24,7 @@ import {
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path={BASE} errorElement={<NotFound />} element={<App />}>
-      <Route path={BASE} element={<Feed />} />
+      <Route path={`${BASE}/`} element={<Feed />} />
       <Route path={`${BASE}/profile/:username?`} element={<Profile />} />
     </Route>
   )

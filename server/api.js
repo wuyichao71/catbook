@@ -46,7 +46,7 @@ router.get("/test", (req, res) => {
   res.send({ message: "Example API endpoint" });
 });
 
-router.get("/stories", (req, res) => {
+router.get("/story", (req, res) => {
   console.log(`METHOD: ${req.method} ${req.url}`);
   Story.find({}).then((stories) => {
     res.send(stories);

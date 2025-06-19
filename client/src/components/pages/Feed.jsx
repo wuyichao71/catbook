@@ -33,7 +33,7 @@ const Feed = () => {
     //   creator_name: "creator name",
     //   content: "story content",
     // }
-    get("/api/stories").then((res) => {
+    get("/api/story").then((res) => {
       const reversedStories = res.reverse();
       setStories(reversedStories);
     });
