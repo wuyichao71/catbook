@@ -9,6 +9,7 @@ export default defineConfig({
   build: {
     outDir: path.resolve(__dirname, "client/dist"), // Output directory for production build
   },
+  base: "/catbook/",
   server: {
     port: 5174,
     proxy: {

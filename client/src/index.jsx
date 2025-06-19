@@ -23,9 +23,9 @@ import {
 // TODO (step5): implement router
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route errorElement=<NotFound /> element=<App />>
-      <Route path="/" element=<Feed /> />
-      <Route path="/profile/:username?" element=<Profile /> />
+    <Route errorElement={<NotFound />} element={<App />}>
+      <Route path="/" element={<Feed />} />
+      <Route path="/profile/:username?" element={<Profile />} />
     </Route>
   )
 );
