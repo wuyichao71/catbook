@@ -4,6 +4,7 @@ const path = require("path");
 const router = require("./api");
 const mongoose = require("mongoose");
 const { MongoClient, ServerApiVersion } = require("mongodb");
+const cors = require("cors");
 
 const mongoConnectionURL = process.env.mongoURL;
 const databaseName = process.env.databaseName;
@@ -45,6 +46,7 @@ run().catch(console.dir);
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 app.use("/api", router);
 
