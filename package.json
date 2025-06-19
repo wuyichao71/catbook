@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "start": "nodemon"
+    "start": "nodemon",
+    "deploy": "gh-pages -d client/dist"
   },
   "repository": {
     "type": "git",

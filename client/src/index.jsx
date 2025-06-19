@@ -5,7 +5,7 @@ import App from "./components/App";
 import NotFound from "./components/pages/NotFound";
 import Feed from "./components/pages/Feed";
 import Profile from "./components/pages/Profile";
-
+import { BASE } from "./utilities";
 // TODO (step5): uncomment the following imports from react-router-dom
 // import {
 //   createBrowserRouter,
@@ -23,9 +23,9 @@ import {
 // TODO (step5): implement router
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route errorElement={<NotFound />} element={<App />}>
-      <Route path="/" element={<Feed />} />
-      <Route path="/profile/:username?" element={<Profile />} />
+    <Route path={BASE} errorElement={<NotFound />} element={<App />}>
+      <Route path={BASE} element={<Feed />} />
+      <Route path={`${BASE}/profile/:username?`} element={<Profile />} />
     </Route>
   )
 );

@@ -1,6 +1,6 @@
 import React from "react";
-import {Link} from 'react-router-dom';
-
+import { Link } from "react-router-dom";
+import { BASE } from "../../utilities";
 import "./NavBar.css";
 
 /**
@@ -11,8 +11,12 @@ const NavBar = () => {
     <nav className="NavBar-container">
       <div className="NavBar-title u-inlineBlock">Catbook</div>
       <div className="NavBar-linkContainer u-inlineBlock">
-        <Link to="/" className="NavBar-link">Home</Link>
-        <Link to="/profile" className="NavBar-link">Profile</Link>
+        <Link to={BASE} className="NavBar-link">
+          Home
+        </Link>
+        <Link to={`${BASE}/profile`} className="NavBar-link">
+          Profile
+        </Link>
       </div>
       {/* TODO (step5): implement links to pages */}
     </nav>

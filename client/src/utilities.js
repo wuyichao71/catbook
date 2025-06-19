@@ -1,4 +1,5 @@
 const BASE_URL = "";
+export const BASE = "/catbook";
 
 const formatParams = (params) => {
   return Object.keys(params)
