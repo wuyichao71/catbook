@@ -45,7 +45,7 @@ const Feed = () => {
       {stories.length !== 0 ? (
         stories.map((storyObj, idx) => (
           <Card
-            key={`SingleStory_${stories.length - idx}`}
+            key={`story_${storyObj._id}`}
             _id={storyObj._id}
             creator_name={storyObj.creator_name}
             content={storyObj.content}

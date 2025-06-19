@@ -11,50 +11,66 @@ import { post } from "../../utilities";
  * @param {({storyId, value}) => void} onSubmit: (function) triggered when this post is submitted, takes {storyId, value} as parameters
  */
 const NewPostInput = (props) => {
+  const [userNameValue, setUserNameValue] = useState("");
   const [value, setValue] = useState("");
 
   const handleChange = (event) => {
     setValue(event.target.value);
   };
 
+  const handleUserNameChange = (event) => {
+    setUserNameValue(event.target.value);
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    props.onSubmit && props.onSubmit(value);
+    props.onSubmit && props.onSubmit(userNameValue, value);
     setValue("");
+    setUserNameValue("");
   };
   return (
-    <div className="u-flex">
-      <input
-        type="text"
-        placeholder={props.defaultText}
-        value={value}
-        onChange={handleChange}
-        className="NewPostInput-input"
-      />
-      <button className="NewPostInput-button" onClick={handleSubmit}>
-        Submit
-      </button>
+    <div className="u-flex-column">
+      <div className="u-flex">
+        <p className="u-bold NewPostInput-userName">User: </p>
+        <input
+          type="text"
+          placeholder="Enter your name"
+          value={userNameValue}
+          onChange={handleUserNameChange}
+          className="NewPostInput-userNameInput"
+        />
+      </div>
+      <div className="u-flex">
+        <input
+          type="text"
+          placeholder={props.defaultText}
+          value={value}
+          onChange={handleChange}
+          className="NewPostInput-input"
+        />
+        <button className="NewPostInput-button" onClick={handleSubmit}>
+          Submit
+        </button>
+      </div>
     </div>
   );
 };
 
 const NewStory = (props) => {
-  const addStory = (value) => {
-    const id = "id" + Math.random().toString(16).slice(2);
-    props.addNewStory &&
-      props.addNewStory({ _id: id, creator_name: "Anonymous User", content: value });
+  const addStory = (userNameValue, value) => {
+    // const id = "id" + Math.random().toString(16).slice(2);
+    props.addNewStory && props.addNewStory({ creator_name: userNameValue, content: value });
   };
 
   return <NewPostInput defaultText="What's on your mind?" onSubmit={addStory} />;
 };
 
 const NewComment = (props) => {
-  const addComment = (value) => {
-    const id = "commentid" + Math.random().toString(16).slice(2);
+  const addComment = (userNameValue, value) => {
+    // const id = "commentid" + Math.random().toString(16).slice(2);
     props.addNewComment &&
       props.addNewComment({
-        _id: id,
-        creator_name: "Anonymous User",
+        creator_name: userNameValue,
         content: value,
         parent: props.storyId,
       });

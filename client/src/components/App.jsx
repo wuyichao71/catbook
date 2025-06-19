@@ -1,7 +1,7 @@
 import React from "react";
 import NavBar from "./modules/NavBar";
 import Profile from "./pages/Profile";
-import Feed from './pages/Feed';
+import Feed from "./pages/Feed";
 // TODO (step0): import Feed
 // TODO (step5): import Outlet
 import { Outlet } from "react-router-dom";
@@ -20,7 +20,7 @@ const App = () => {
     <>
       <NavBar />
       <div className="App-container">
-        <Outlet></Outlet>
+        <Outlet />
       </div>
     </>
   );

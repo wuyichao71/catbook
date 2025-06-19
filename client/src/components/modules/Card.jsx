@@ -42,7 +42,7 @@ const Card = (props) => {
     //   parent: "parent story id",
     //   content: "story content",
     // }
-    get("/api/comments", { parent: props._id }).then((comments) => {
+    get("/api/comment", { parent: props._id }).then((comments) => {
       setComments(comments);
     });
   }, []);

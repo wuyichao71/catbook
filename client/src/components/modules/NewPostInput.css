@@ -29,3 +29,16 @@
   color: var(--white);
   background-color: var(--primary);
 }
+
+.NewPostInput-userName {
+  margin: auto var(--s);
+}
+
+.NewPostInput-userNameInput {
+  font-family: "Open Sans";
+  font-size: 12px;
+  padding: var(--xs) var(--m);
+  border: var(--darkgrey) 1px solid;
+  border-radius: var(--xs) 0 0 var(--xs);
+  transition: box-shadow 0.1s;
+}

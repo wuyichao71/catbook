@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import CatHappiness from "../modules/CatHappiness";
-
+import { useParams } from "react-router-dom";
 import "../../utilities.css";
 import "./Profile.css";
 
 const Profile = () => {
   const [catHappiness, setCatHappiness] = useState(0);
+  const { username } = useParams();
 
   useEffect(() => {
     document.title = "Profile Page";
@@ -25,7 +26,7 @@ const Profile = () => {
       >
         <div className="Profile-avatar" />
       </div>
-      <h1 className="Profile-name u-textCenter">Kenny Choi</h1>
+      <h1 className="Profile-name u-textCenter">{username ? username : "Unknown"}</h1>
       <hr className="Profile-line" />
       <div className="u-flex">
         <div className="Profile-subContainer u-textCenter">

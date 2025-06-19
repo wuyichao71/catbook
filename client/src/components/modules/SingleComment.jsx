@@ -13,7 +13,7 @@ const SingleComment = (props) => {
   return (
     <div className="Card-commentBody">
       {/* TODO (step7): render comment creator and content */}
-      <Link to="/profile" className="u-link u-bold">
+      <Link to={`/profile/${props.creator_name}`} className="u-link u-bold">
         {props.creator_name}
       </Link>
       <span>{" | " + props.content}</span>

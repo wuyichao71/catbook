@@ -17,19 +17,17 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
   Route,
-  RouterProvider
-} from 'react-router-dom';
+  RouterProvider,
+} from "react-router-dom";
 
 // TODO (step5): implement router
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route errorElement=<NotFound /> element=<App />>
       <Route path="/" element=<Feed /> />
-      <Route path="/profile" element=<Profile /> />
+      <Route path="/profile/:username?" element=<Profile /> />
     </Route>
   )
-)
-// renders React Component "Root" into the DOM element with ID "root"
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <RouterProvider router={router} />
 );
+// renders React Component "Root" into the DOM element with ID "root"
+ReactDOM.createRoot(document.getElementById("root")).render(<RouterProvider router={router} />);
