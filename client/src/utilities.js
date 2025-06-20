@@ -1,5 +1,5 @@
 const BASE_URL = "https://catbook-api.onrender.com";
-export const BASE = "/catbook";
+// export const BASE = "";
 
 const formatParams = (params) => {
   return Object.keys(params)

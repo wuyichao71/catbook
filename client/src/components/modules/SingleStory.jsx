@@ -1,7 +1,7 @@
 import React from "react";
 import "./Card.css";
 import { Link } from "react-router-dom";
-import { BASE } from "../../utilities";
+// import { BASE } from "../../utilities";
 // TODO (ste12): import Card.css
 
 /**
@@ -15,7 +15,7 @@ import { BASE } from "../../utilities";
 const SingleStory = (props) => {
   return (
     <div className="Card-story">
-      <Link to={`${BASE}/profile/${props.creator_name}`} className="u-link u-bold">
+      <Link to={`profile/${props.creator_name}`} className="u-link u-bold">
         {props.creator_name}
       </Link>
       <p className="Card-storyContent">{props.content}</p>

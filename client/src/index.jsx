@@ -5,7 +5,7 @@ import App from "./components/App";
 import NotFound from "./components/pages/NotFound";
 import Feed from "./components/pages/Feed";
 import Profile from "./components/pages/Profile";
-import { BASE } from "./utilities";
+// import { BASE } from "./utilities";
 // TODO (step5): uncomment the following imports from react-router-dom
 // import {
 //   createBrowserRouter,
@@ -26,9 +26,9 @@ const router = createBrowserRouter(
     <Route path="/" errorElement={<NotFound />} element={<App />}>
       <Route path="/" element={<Feed />} />
       <Route path="profile/:username?" element={<Profile />} />
-    </Route>,
-    { basename: "/catbook/" }
-  )
+    </Route>
+  ),
+  { basename: "/catbook/" }
 );
 // renders React Component "Root" into the DOM element with ID "root"
 ReactDOM.createRoot(document.getElementById("root")).render(<RouterProvider router={router} />);

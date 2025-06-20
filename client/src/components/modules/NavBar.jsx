@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { BASE } from "../../utilities";
+// import { BASE } from "../../utilities";
 import "./NavBar.css";
 
 /**
@@ -11,10 +11,10 @@ const NavBar = () => {
     <nav className="NavBar-container">
       <div className="NavBar-title u-inlineBlock">Catbook</div>
       <div className="NavBar-linkContainer u-inlineBlock">
-        <Link to={BASE} className="NavBar-link">
+        <Link to="/" className="NavBar-link">
           Home
         </Link>
-        <Link to={`${BASE}/profile`} className="NavBar-link">
+        <Link to={`/profile`} className="NavBar-link">
           Profile
         </Link>
       </div>
