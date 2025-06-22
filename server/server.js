@@ -3,8 +3,9 @@ const express = require("express");
 const path = require("path");
 const router = require("./api");
 const mongoose = require("mongoose");
-const { MongoClient, ServerApiVersion } = require("mongodb");
+// const { MongoClient, ServerApiVersion } = require("mongodb");
 const cors = require("cors");
+// const { fileURLToPath } = require("url");
 
 const mongoConnectionURL = process.env.mongoURL;
 const databaseName = process.env.databaseName;
@@ -47,6 +48,12 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
+
+app.use("/catbook", express.static(path.resolve(__dirname, "..", "client", "dist")));
+
+app.get("/catbook/*", (req, res) => {
+  res.sendFile(path.resolvr(__dirname, "..", "client", "dist", "index.html"));
+});
 
 app.use("/api", router);
 

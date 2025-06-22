@@ -1,4 +1,8 @@
 // const BASE_URL = "https://catbook-api.onrender.com";
+console.log(import.meta.env.MODE);
+console.log(import.meta.env.DEV);
+console.log(import.meta.env.VITE_API_BASE);
+console.log(import.meta.env.VITE_TEST);
 const BASE_URL = import.meta.env.VITE_API_BASE;
 // export const BASE = "/catbook";
 
@@ -29,7 +33,7 @@ const convertToJSON = (res) => {
 
 export const get = (endpoint, params = {}) => {
   const fullPath = endpoint + "?" + formatParams(params);
-  return fetch(path.resolve(BASE_URL, fullPath))
+  return fetch(BASE_URL + fullPath)
     .then(convertToJSON)
     .catch((error) => {
       throw `GET request to ${fullPath} failed with error:\n${error}`;
