@@ -1,5 +1,6 @@
-const BASE_URL = "https://catbook-api.onrender.com";
-// export const BASE = "";
+// const BASE_URL = "https://catbook-api.onrender.com";
+const BASE_URL = import.meta.env.VITE_API_BASE;
+// export const BASE = "/catbook";
 
 const formatParams = (params) => {
   return Object.keys(params)
@@ -10,10 +11,10 @@ const formatParams = (params) => {
 const convertToJSON = (res) => {
   if (!res.ok) {
     throw `API request failed with response status ${res.status} and text: ${res.statusText}`;
-    res.json().then((result) => {
-      console.error(`${result.err}`);
-      throw `API request failed with response status ${res.status} and text: ${res.statusText}`;
-    });
+    // res.json().then((result) => {
+    //   console.error(`${result.err}`);
+    //   throw `API request failed with response status ${res.status} and text: ${res.statusText}`;
+    // });
   }
 
   return res
@@ -28,7 +29,7 @@ const convertToJSON = (res) => {
 
 export const get = (endpoint, params = {}) => {
   const fullPath = endpoint + "?" + formatParams(params);
-  return fetch(BASE_URL + fullPath)
+  return fetch(path.resolve(BASE_URL, fullPath))
     .then(convertToJSON)
     .catch((error) => {
       throw `GET request to ${fullPath} failed with error:\n${error}`;

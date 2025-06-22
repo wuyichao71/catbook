@@ -12,16 +12,16 @@ export default defineConfig({
   base: "/catbook/",
   server: {
     port: 5174,
-    // proxy: {
-    //   "/api": {
-    //     target: "https://catbook-api.onrender.com",
-    //     changeOrigin: true,
-    //   },
-    //   "/socket.io": {
-    //     target: "https://catbook-api.onrender.com",
-    //     ws: true,
-    //     changeOrigin: true,
-    //   },
-    // },
+    proxy: {
+      "/api": {
+        target: "localhost:3000",
+        changeOrigin: true,
+      },
+      "/socket.io": {
+        target: "localhost:3000",
+        ws: true,
+        changeOrigin: true,
+      },
+    },
   },
 });

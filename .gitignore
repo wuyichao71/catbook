@@ -4,6 +4,6 @@ package-lock.json
 .DS_Store
 venv/
 .venv/
-.env
+.env*
 chroma.log
 chroma_data/
