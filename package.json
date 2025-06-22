@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build && cpy client/dist/index.html . --rename=404.html ",
+    "netlify": "vite build --mode netlify",
     "preview": "vite preview",
     "start": "nodemon",
     "deploy": "gh-pages -d client/dist"

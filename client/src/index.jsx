@@ -28,7 +28,7 @@ const router = createBrowserRouter(
       <Route path="profile/:username?" element={<Profile />} />
     </Route>
   ),
-  { basename: "/catbook/" }
+  { basename: import.meta.env.VITE_BASENAME }
 );
 // renders React Component "Root" into the DOM element with ID "root"
 ReactDOM.createRoot(document.getElementById("root")).render(<RouterProvider router={router} />);

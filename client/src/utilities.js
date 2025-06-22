@@ -2,7 +2,7 @@
 console.log(import.meta.env.MODE);
 console.log(import.meta.env.DEV);
 console.log(import.meta.env.VITE_API_BASE);
-console.log(import.meta.env.VITE_TEST);
+console.log(import.meta.env.VITE_BASENAME);
 const BASE_URL = import.meta.env.VITE_API_BASE;
 // export const BASE = "/catbook";
 
