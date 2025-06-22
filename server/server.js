@@ -52,7 +52,7 @@ app.use(cors());
 app.use("/catbook", express.static(path.resolve(__dirname, "..", "client", "dist")));
 
 app.get("/catbook/*", (req, res) => {
-  res.sendFile(path.resolvr(__dirname, "..", "client", "dist", "index.html"));
+  res.sendFile(path.resolve(__dirname, "..", "client", "dist", "index.html"));
 });
 
 app.use("/api", router);
