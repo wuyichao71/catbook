@@ -8,7 +8,7 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, root);
   const base = env.VITE_BASENAME;
   const outdir = env.VITE_OUTDIR;
-  console.log(outdir);
+  // console.log(outdir);
 
   return {
     plugins: [react(), svgr()],
