@@ -6,11 +6,12 @@ import "./NavBar.css";
 /**
  * The navigation bar at the top of all pages. Takes no props.
  */
-const NavBar = () => {
+const NavBar = (res) => {
   const [loginState, setLoginState] = useState(false);
 
-  const handleLogin = () => {
+  const handleLogin = (l) => {
     setLoginState(true);
+    console.log(res);
   };
 
   const handleLogout = () => {
@@ -21,19 +22,22 @@ const NavBar = () => {
     <nav className="NavBar-container">
       <div className="NavBar-title u-inlineBlock">Catbook</div>
       <div className="NavBar-linkContainer u-inlineBlock">
-        <Link to="/" className="NavBar-link u-inlineBlock">
+        <Link to="/" className="NavBar-link">
           Home
         </Link>
-        <Link to={`/profile`} className="NavBar-link u-inlineBlock">
+        <Link to="/profile" className="NavBar-link">
           Profile
         </Link>
         {loginState ? (
           <button onClick={handleLogout}>Logout</button>
         ) : (
           <GoogleLogin
+            text="signin_with"
             onSuccess={handleLogin}
-            onError={() => {}}
-            containerProps={{ className: "u-link u-inlineBlock" }}
+            onError={(err) => {
+              console.log(err);
+            }}
+            containerProps={{ className: "NavBar-link NavBar-login u-inlineBlock" }}
           />
         )}
       </div>

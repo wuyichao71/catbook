@@ -6,10 +6,12 @@
 .NavBar-title {
   color: var(--white);
   font-size: 20px;
+  vertical-align: middle;
 }
 
 .NavBar-linkContainer {
   margin-left: var(--l);
+  
 }
 
 .NavBar-link,
@@ -17,6 +19,7 @@
   color: var(--white);
   opacity: 0.6;
   text-decoration: none;
+  vertical-align: middle;
   /* transition: opacity 0.5s, color 0.5s; */
 }
 

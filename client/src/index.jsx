@@ -21,7 +21,9 @@ import {
 } from "react-router-dom";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 
-const GOOGLE_CLIENT_ID = "679107334216-rrf9jv2ge1p784jlha06o5n2gft7tjsl.apps.googleusercontent.com";
+const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+// const GOOGLE_CLIENT_ID = "652128607404-rkv0o9ma7cqrlf75vlums1ga44ha59d9.apps.googleusercontent.com";
+console.log(GOOGLE_CLIENT_ID);
 
 // TODO (step5): implement router
 const router = createBrowserRouter(
