@@ -17,13 +17,17 @@ const NavBar = () => {
     <nav className="NavBar-container">
       <div className="NavBar-title u-inlineBlock">Catbook</div>
       <div className="NavBar-linkContainer u-inlineBlock">
-        <Link to="/" className="NavBar-link">
+        <Link to="/" className="NavBar-link u-inlineBlock">
           Home
         </Link>
-        <Link to={`/profile`} className="NavBar-link">
+        <Link to={`/profile`} className="NavBar-link u-inlineBlock">
           Profile
         </Link>
-        <GoogleLogin onSuccess={handleLogin} onError={() => {}} className="u-inlineBlock" />
+        <GoogleLogin
+          onSuccess={handleLogin}
+          onError={() => {}}
+          containerProps={{ className: "u-link u-inlineBlock" }}
+        />
       </div>
 
       {/* TODO (step5): implement links to pages */}
