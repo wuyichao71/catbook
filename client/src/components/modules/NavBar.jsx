@@ -7,10 +7,14 @@ import "./NavBar.css";
  * The navigation bar at the top of all pages. Takes no props.
  */
 const NavBar = () => {
-  const [login, setLogin] = useState(false);
+  const [loginState, setLoginState] = useState(false);
 
   const handleLogin = () => {
-    setLogin(true);
+    setLoginState(true);
+  };
+
+  const handleLogout = () => {
+    setLoginState(false);
   };
 
   return (
@@ -23,11 +27,15 @@ const NavBar = () => {
         <Link to={`/profile`} className="NavBar-link u-inlineBlock">
           Profile
         </Link>
-        <GoogleLogin
-          onSuccess={handleLogin}
-          onError={() => {}}
-          containerProps={{ className: "u-link u-inlineBlock" }}
-        />
+        {loginState ? (
+          <button onClick={handleLogout}>Logout</button>
+        ) : (
+          <GoogleLogin
+            onSuccess={handleLogin}
+            onError={() => {}}
+            containerProps={{ className: "u-link u-inlineBlock" }}
+          />
+        )}
       </div>
 
       {/* TODO (step5): implement links to pages */}
