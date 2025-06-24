@@ -1,7 +1,8 @@
 require("dotenv").config();
 const express = require("express");
+const session = require("express-session");
 const path = require("path");
-const router = require("./api");
+const api = require("./api");
 const mongoose = require("mongoose");
 // const { MongoClient, ServerApiVersion } = require("mongodb");
 const cors = require("cors");
@@ -23,23 +24,6 @@ async function run() {
   } finally {
     // await mongoose.connection.close();
   }
-
-  // const client = new MongoClient(mongoConnectionURL, { dbName: databaseName });
-  // try {
-  //   await client
-  //     .connect()
-  //     .then(() => {
-  //       console.log(`Connected to MongoDB database: ${databaseName}`);
-  //     })
-  //     .catch((err) => {
-  //       console.error(`Error connecting to MongoDB: ${err}`);
-  //     });
-
-  //   await client.db("admin").command({ ping: 1 });
-  //   console.log("Pinged your deployment. You successfully connected to MongoDB (mongodb)!");
-  // } finally {
-  //   await client.close();
-  // }
 }
 
 run().catch(console.dir);
@@ -47,6 +31,14 @@ run().catch(console.dir);
 const app = express();
 
 app.use(express.json());
+app.use(
+  session({
+    secret: "session-secret",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+
 app.use(cors());
 
 app.use("/catbook", express.static(path.resolve(__dirname, "..", "client", "dist")));
@@ -55,7 +47,7 @@ app.get("/catbook/*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "..", "client", "dist", "index.html"));
 });
 
-app.use("/api", router);
+app.use("/api", api);
 
 app.all("*", (req, res) => {
   console.log(`Route not found: ${req.method} ${req.url}`);

@@ -14,6 +14,11 @@
   
 }
 
+.NavBar-logoutButton {
+  border: 0;
+  background-color: white;
+}
+
 .NavBar-link,
 .NavBar-link:visited {
   color: var(--white);
@@ -35,5 +40,9 @@
 }
 
 .NavBar-link + .NavBar-link {
+  margin-left: var(--m);
+}
+
+.NavBar-link + .NavBar-logoutButton {
   margin-left: var(--m);
 }

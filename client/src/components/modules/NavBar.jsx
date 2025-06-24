@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
+import { post } from "../../utilities";
 import "./NavBar.css";
 
 /**
@@ -9,9 +10,13 @@ import "./NavBar.css";
 const NavBar = (res) => {
   const [loginState, setLoginState] = useState(false);
 
-  const handleLogin = (l) => {
+  const handleLogin = (res) => {
     setLoginState(true);
-    console.log(res);
+    // console.log(res);
+    const userToken = res.credential;
+    post("/api/login", { token: userToken }).then((user) => {
+      console.log(user);
+    });
   };
 
   const handleLogout = () => {
@@ -29,7 +34,9 @@ const NavBar = (res) => {
           Profile
         </Link>
         {loginState ? (
-          <button onClick={handleLogout}>Logout</button>
+          <button onClick={handleLogout} className="NavBar-logoutButton">
+            Log out
+          </button>
         ) : (
           <GoogleLogin
             text="signin_with"
