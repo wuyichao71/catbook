@@ -2,6 +2,7 @@ const express = require("express");
 
 const Story = require("./models/story");
 const Comment = require("./models/comment");
+const User = require("./models/user");
 const auth = require("./auth");
 
 const router = express.Router();
@@ -15,19 +16,22 @@ router.get("/story", (req, res) => {
   Story.find({}).then((stories) => {
     res.send(stories);
   });
-  // if (typeof stories === "undefined") {
-  //   console.error("Stories are not defined");
-  //   return res.status(500).send({ error: "Stories not found" });
-  // }
-  // res.send(stories);
 });
 
 router.post("/story", (req, res) => {
   console.log(`METHOD: ${req.method} ${req.url}`);
-  const newStory = new Story(req.body);
-  newStory.save().then((savedStory) => {
-    res.send(savedStory);
-  });
+  if (req.user) {
+    const newStory = new Story({
+      content: req.body.content,
+      creator_name: req.user.name,
+      creator_id: req.user._id,
+    });
+    newStory.save().then((savedStory) => {
+      res.send(savedStory);
+    });
+  } else {
+    res.status(400).send({ message: "User is not logged in!" });
+  }
 });
 
 router.get("/comment", (req, res) => {
@@ -43,6 +47,17 @@ router.post("/comment", (req, res) => {
   newComment.save().then((savedComment) => {
     res.send(savedComment);
   });
+});
+
+router.get("/user", (req, res) => {
+  User.findById(req.query.userId)
+    .then((user) => {
+      res.send(user);
+    })
+    .catch((err) => {
+      res.status(400).send({ message: "The user does not exist!" });
+      console.log(err.message);
+    });
 });
 
 router.post("/login", auth.login);

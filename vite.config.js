@@ -8,6 +8,7 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, root);
   const base = env.VITE_BASENAME;
   const outdir = env.VITE_OUTDIR;
+  const port = env.VITE_PORT;
   // console.log(outdir);
 
   return {
@@ -21,11 +22,11 @@ export default defineConfig(({ mode }) => {
       port: 5174,
       proxy: {
         "/api": {
-          target: "http://localhost:3000",
+          target: `http://localhost:${port}`,
           changeOrigin: true,
         },
         "/socket.io": {
-          target: "http://localhost:3000",
+          target: `http://localhost:${port}`,
           ws: true,
           changeOrigin: true,
         },

@@ -2,11 +2,14 @@ require("dotenv").config();
 const express = require("express");
 const session = require("express-session");
 const path = require("path");
-const api = require("./api");
+
 const mongoose = require("mongoose");
 // const { MongoClient, ServerApiVersion } = require("mongodb");
 const cors = require("cors");
 // const { fileURLToPath } = require("url");
+
+const api = require("./api");
+const auth = require("./auth");
 
 const mongoConnectionURL = process.env.mongoURL;
 const databaseName = process.env.databaseName;
@@ -47,6 +50,8 @@ app.get("/catbook/*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "..", "client", "dist", "index.html"));
 });
 
+app.use(auth.populateCurrentUser);
+
 app.use("/api", api);
 
 app.all("*", (req, res) => {
@@ -70,7 +75,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-const port = 3000;
+const port = process.env.PORT;
 app.listen(port, () => {
   console.log(`Server running on port: ${port}`);
 });

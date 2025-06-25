@@ -11,15 +11,18 @@ const NavBar = (res) => {
   const [loginState, setLoginState] = useState(false);
 
   const handleLogin = (res) => {
-    setLoginState(true);
-    // console.log(res);
     const userToken = res.credential;
     post("/api/login", { token: userToken }).then((user) => {
       console.log(user);
     });
+    setLoginState(true);
+    // console.log(res);
   };
 
   const handleLogout = () => {
+    post("/api/logout", {}).then((user) => {
+      console.log(user);
+    });
     setLoginState(false);
   };
 

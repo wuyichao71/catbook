@@ -15,7 +15,7 @@ import { Link } from "react-router-dom";
 const SingleStory = (props) => {
   return (
     <div className="Card-story">
-      <Link to={`profile/${props.creator_name}`} className="u-link u-bold">
+      <Link to={`profile/${props.creator_id}`} className="u-link u-bold">
         {props.creator_name}
       </Link>
       <p className="Card-storyContent">{props.content}</p>

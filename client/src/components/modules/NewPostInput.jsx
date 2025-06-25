@@ -11,26 +11,27 @@ import { post } from "../../utilities";
  * @param {({storyId, value}) => void} onSubmit: (function) triggered when this post is submitted, takes {storyId, value} as parameters
  */
 const NewPostInput = (props) => {
-  const [userNameValue, setUserNameValue] = useState("");
+  // const [userNameValue, setUserNameValue] = useState("");
   const [value, setValue] = useState("");
 
   const handleChange = (event) => {
     setValue(event.target.value);
   };
 
-  const handleUserNameChange = (event) => {
-    setUserNameValue(event.target.value);
-  };
+  // const handleUserNameChange = (event) => {
+  //   setUserNameValue(event.target.value);
+  // };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    props.onSubmit && props.onSubmit(userNameValue, value);
+    // props.onSubmit && props.onSubmit(userNameValue, value);
+    props.onSubmit && props.onSubmit(value);
     setValue("");
-    setUserNameValue("");
+    // setUserNameValue("");
   };
   return (
     <div className="u-flex-column">
-      <div className="u-flex">
+      {/* <div className="u-flex">
         <p className="u-bold NewPostInput-userName">User: </p>
         <input
           type="text"
@@ -39,7 +40,7 @@ const NewPostInput = (props) => {
           onChange={handleUserNameChange}
           className="NewPostInput-userNameInput"
         />
-      </div>
+      </div> */}
       <div className="u-flex">
         <input
           type="text"
@@ -57,9 +58,13 @@ const NewPostInput = (props) => {
 };
 
 const NewStory = (props) => {
-  const addStory = (userNameValue, value) => {
+  // const addStory = (userNameValue, value) => {
+  //   // const id = "id" + Math.random().toString(16).slice(2);
+  //   props.addNewStory && props.addNewStory({ creator_name: userNameValue, content: value });
+  // };
+  const addStory = (value) => {
     // const id = "id" + Math.random().toString(16).slice(2);
-    props.addNewStory && props.addNewStory({ creator_name: userNameValue, content: value });
+    props.addNewStory && props.addNewStory({ content: value });
   };
 
   return <NewPostInput defaultText="What's on your mind?" onSubmit={addStory} />;
