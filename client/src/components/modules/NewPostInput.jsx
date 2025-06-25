@@ -71,14 +71,9 @@ const NewStory = (props) => {
 };
 
 const NewComment = (props) => {
-  const addComment = (userNameValue, value) => {
+  const addComment = (value) => {
     // const id = "commentid" + Math.random().toString(16).slice(2);
-    props.addNewComment &&
-      props.addNewComment({
-        creator_name: userNameValue,
-        content: value,
-        parent: props.storyId,
-      });
+    props.addNewComment && props.addNewComment({ content: value, parent: props.storyId });
     // post("/api/comment", { content: value, parent: props.storyId });
   };
   return <NewPostInput defaultText="New Comment" onSubmit={addComment} />;

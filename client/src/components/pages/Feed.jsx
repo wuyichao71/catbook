@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 // TODO (step1): import SingleStory
-import SingleStory from "../modules/SingleStory";
+// import SingleStory from "../modules/SingleStory";
 import { NewStory } from "../modules/NewPostInput";
 import Card from "../modules/Card";
 import { get, post } from "../../utilities";
+import { UserContext } from "../modules/CreateContext";
+import { useContext } from "react";
 // TODO (step4): import NewStory
 // TODO (step6): remove SingleStory import, import Card
 
@@ -39,9 +41,11 @@ const Feed = () => {
     });
   }, []);
 
+  const userId = useContext(UserContext);
+
   return (
     <div>
-      <NewStory addNewStory={addNewStory} />
+      {userId ? <NewStory addNewStory={addNewStory} /> : null}
       {stories.length !== 0 ? (
         stories.map((storyObj, idx) => (
           <Card

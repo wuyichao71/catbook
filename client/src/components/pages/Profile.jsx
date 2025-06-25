@@ -13,12 +13,8 @@ const Profile = () => {
   useEffect(() => {
     document.title = "Profile Page";
     get("/api/user", { userId: userId }).then((user) => {
-      // console.log(user);
       setUser(user);
     });
-    // .catch((err) => {
-    //   console.log(err.code);
-    // });
   }, []);
 
   const incrementCatHappiness = () => {
@@ -31,13 +27,13 @@ const Profile = () => {
         <div> Loading! </div>
       ) : (
         <>
-          <div
-            className="Profile-avatarContainer"
-            onClick={() => {
-              incrementCatHappiness();
-            }}
-          >
-            <div className="Profile-avatar" />
+          <div className="Profile-avatarContainer">
+            <div
+              className="Profile-avatar"
+              onClick={() => {
+                incrementCatHappiness();
+              }}
+            />
           </div>
           <h1 className="Profile-name u-textCenter">{user.name}</h1>
           <hr className="Profile-line" />

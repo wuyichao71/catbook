@@ -1,7 +1,7 @@
 require("dotenv").config();
 const User = require("./models/user");
 const { OAuth2Client } = require("google-auth-library");
-const CLIENT_ID = process.env.CLIENT_ID;
+const CLIENT_ID = process.env.VITE_GOOGLE_CLIENT_ID;
 
 const client = new OAuth2Client(CLIENT_ID);
 
@@ -40,8 +40,10 @@ const login = (req, res) => {
 
 const logout = (req, res) => {
   console.log(`Logged out as ${req.user.name}`);
+  // console.log(`${req.user.name}`);
   req.session.user = null;
-  res.send({ user: req.user.name });
+  // console.log(`${req.user.name}`);
+  res.send({ name: req.user.name });
 };
 
 const populateCurrentUser = (req, res, next) => {

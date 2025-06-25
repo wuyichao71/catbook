@@ -43,7 +43,12 @@ router.get("/comment", (req, res) => {
 
 router.post("/comment", (req, res) => {
   console.log(`METHOD: ${req.method} ${req.url}`);
-  const newComment = new Comment(req.body);
+  const newComment = new Comment({
+    content: req.body.content,
+    creator_name: req.user.name,
+    creator_id: req.user.googleid,
+    parent: req.body.parent,
+  });
   newComment.save().then((savedComment) => {
     res.send(savedComment);
   });
@@ -63,6 +68,14 @@ router.get("/user", (req, res) => {
 router.post("/login", auth.login);
 
 router.post("/logout", auth.logout);
+
+router.get("/whoami", (req, res) => {
+  if (req.user) {
+    res.send(req.user);
+  } else {
+    res.send({});
+  }
+});
 
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {

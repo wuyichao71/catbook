@@ -1,6 +1,8 @@
 import React from "react";
 import SingleComment from "./SingleComment";
 import { NewComment } from "./NewPostInput";
+import { UserContext } from "./CreateContext";
+import { useContext } from "react";
 // import "./Card.css";
 // TODO (step9): import SingleComment and NewComment
 
@@ -19,18 +21,21 @@ import { NewComment } from "./NewPostInput";
  * @param {ContentObject} story
  */
 const CommentsBlock = (props) => {
+  const userId = useContext(UserContext);
   return (
     <div className="Card-commentSection">
       <div className="story-comments">
         {props.comments.map((comment, idx) => (
           <SingleComment
-            key={`SingleComment_${idx}`}
+            key={comment._id}
             _id={comment._id}
             creator_name={comment.creator_name}
             content={comment.content}
           />
         ))}
-        <NewComment storyId={props.story._id} addNewComment={props.addNewComment} />
+        {userId ? (
+          <NewComment storyId={props.story._id} addNewComment={props.addNewComment} />
+        ) : null}
       </div>
     </div>
   );

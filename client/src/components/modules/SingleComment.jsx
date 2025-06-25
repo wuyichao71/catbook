@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { UserContext } from "./CreateContext";
+import { useContext } from "react";
 // import { BASE } from "../../utilities";
 
 /**
@@ -11,10 +13,11 @@ import { Link } from "react-router-dom";
  * @param {string} content of the comment
  */
 const SingleComment = (props) => {
+  const userId = useContext(UserContext);
   return (
     <div className="Card-commentBody">
       {/* TODO (step7): render comment creator and content */}
-      <Link to={`profile/${props.creator_id}`} className="u-link u-bold">
+      <Link to={`profile/${userId}`} className="u-link u-bold">
         {props.creator_name}
       </Link>
       <span>{" | " + props.content}</span>
