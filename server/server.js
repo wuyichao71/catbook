@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const session = require("express-session");
+const cookieSession = require("cookie-session");
 const path = require("path");
 
 const mongoose = require("mongoose");
@@ -34,11 +35,19 @@ run().catch(console.dir);
 const app = express();
 
 app.use(express.json());
+// app.use(
+//   session({
+//     secret: "session-secret",
+//     resave: false,
+//     saveUninitialized: false,
+//   })
+// );
+
 app.use(
-  session({
-    secret: "session-secret",
-    resave: false,
-    saveUninitialized: false,
+  cookieSession({
+    name: "session",
+    keys: ["session-secret"],
+    maxAge: 24 * 60 * 60 * 1000,
   })
 );
 
