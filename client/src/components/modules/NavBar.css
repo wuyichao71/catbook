@@ -11,16 +11,18 @@
 
 .NavBar-linkContainer {
   margin-left: var(--l);
-  
 }
 
 .NavBar-logoutButton {
   border: 0;
-  background-color: white;
   height: 40px;
   cursor: pointer;
-  border-radius: var(--xs);
+  /* border-radius: var(--xs); */
+  /* font-size: var(--m); */
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
   font-size: var(--m);
+  background-color: transparent;
 }
 
 .NavBar-link,
@@ -47,6 +49,6 @@
   margin-left: var(--m);
 }
 
-.NavBar-link + .NavBar-logoutButton {
+/* .NavBar-link + .NavBar-logoutButton {
   margin-left: var(--m);
-}
+} */

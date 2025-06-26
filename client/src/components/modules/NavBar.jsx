@@ -25,10 +25,7 @@ const NavBar = (props) => {
           </Link>
         )}
         {userId ? (
-          <button
-            onClick={props.handleLogout}
-            className="NavBar-link NavBar-login u-inlineBlock NavBar-logoutButton"
-          >
+          <button onClick={props.handleLogout} className="NavBar-link NavBar-logoutButton">
             Log out
           </button>
         ) : (
