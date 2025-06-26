@@ -40,6 +40,7 @@ const allowedOrigins = [
   "http://localhost:5174",
   "https://wuyichao71.github.io",
   "https://catbook-netlify.netlify.app",
+  "https://catbook-api.onrender.com",
 ];
 
 app.use(
