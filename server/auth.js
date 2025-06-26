@@ -4,6 +4,8 @@ const { OAuth2Client } = require("google-auth-library");
 const CLIENT_ID = process.env.VITE_GOOGLE_CLIENT_ID;
 
 const client = new OAuth2Client(CLIENT_ID);
+const github_client_id = process.env.VITE_GITHUB_CLIENT_ID;
+const github_client_secret = process.env.VITE_GITHUB_CLIENT_SECRET;
 
 const verify = async (token) => {
   return client
@@ -47,6 +49,20 @@ const logout = (req, res) => {
   // res.send({ name: req.user.name });
 };
 
+const githubLogin = (req, res) => {
+  const redirect_uri = "http://localhost:5174/api/auth/github/callback";
+  res.redirect(
+    `https://github.com/login/oauth/authorize?client_id=${github_client_id}&redirect_uri=${redirect_uri}`
+  );
+};
+
+const githubCallback = (req, res) => {
+  const code = req.query.code;
+  console.log(code);
+  // res.send({ code: code });
+  res.redirect("http://localhost:5174/");
+};
+
 const populateCurrentUser = (req, res, next) => {
   req.user = req.session.user;
   next();
@@ -54,6 +70,8 @@ const populateCurrentUser = (req, res, next) => {
 
 module.exports = {
   login,
+  githubLogin,
+  githubCallback,
   logout,
   populateCurrentUser,
 };

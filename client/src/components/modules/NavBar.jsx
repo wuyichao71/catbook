@@ -38,6 +38,9 @@ const NavBar = (props) => {
             containerProps={{ className: "NavBar-link NavBar-login u-inlineBlock" }}
           />
         )}
+        <a href="http://localhost:3000/api/auth/github">
+          <button>使用 GitHub 登录</button>
+        </a>
       </div>
 
       {/* TODO (step5): implement links to pages */}

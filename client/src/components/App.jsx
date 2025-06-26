@@ -44,12 +44,22 @@ const App = () => {
     });
   };
 
+  // const handleGithubLogin = () => {
+  //   get("/api/auth/github").then((res) => {
+  //     console.log(res);
+  //   });
+  // };
+
   return (
     // <> is like a <div>, but won't show
     // up in the DOM tree
     // <>
     <UserContext.Provider value={userId}>
-      <NavBar handleLogin={handleLogin} handleLogout={handleLogout} />
+      <NavBar
+        handleLogin={handleLogin}
+        handleLogout={handleLogout}
+        // handleGithubLogin={handleGithubLogin}
+      />
       <div className="App-container">
         <Outlet />
       </div>

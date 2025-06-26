@@ -66,6 +66,8 @@ router.get("/user", (req, res) => {
 });
 
 router.post("/login", auth.login);
+router.get("/auth/github", auth.githubLogin);
+router.get("/auth/github/callback", auth.githubCallback);
 
 router.post("/logout", auth.logout);
 
