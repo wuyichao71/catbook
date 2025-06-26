@@ -45,7 +45,7 @@ app.use(express.json());
 
 app.use(
   cookieSession({
-    name: "session",
+    name: "catbook_session",
     keys: ["session-secret"],
     maxAge: 24 * 60 * 60 * 1000,
   })
