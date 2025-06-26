@@ -43,6 +43,8 @@ app.use(express.json());
 //   })
 // );
 
+app.use(cors({ credentials: true }));
+
 app.use(
   cookieSession({
     name: "catbook_session",
@@ -50,8 +52,6 @@ app.use(
     maxAge: 24 * 60 * 60 * 1000,
   })
 );
-
-app.use(cors());
 
 app.use("/catbook", express.static(path.resolve(__dirname, "..", "client", "dist")));
 

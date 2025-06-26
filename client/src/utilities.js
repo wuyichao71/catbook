@@ -33,7 +33,7 @@ const convertToJSON = (res) => {
 
 export const get = (endpoint, params = {}) => {
   const fullPath = endpoint + "?" + formatParams(params);
-  return fetch(BASE_URL + fullPath)
+  return fetch(BASE_URL + fullPath, { credentials: "include" })
     .then(convertToJSON)
     .catch((error) => {
       throw `GET request to ${fullPath} failed with error:\n${error}`;
@@ -45,6 +45,7 @@ export function post(endpoint, params = {}) {
     method: "POST",
     headers: { "Content-type": "application/json" },
     body: JSON.stringify(params),
+    credentials: "include",
   })
     .then(convertToJSON) // convert result to JSON object
     .catch((error) => {
