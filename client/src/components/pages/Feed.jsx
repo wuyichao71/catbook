@@ -45,9 +45,9 @@ const Feed = () => {
 
   return (
     <div>
-      {userId ? <NewStory addNewStory={addNewStory} /> : null}
+      {userId && <NewStory addNewStory={addNewStory} />}
       {stories.length !== 0 ? (
-        stories.map((storyObj, idx) => (
+        stories.map((storyObj) => (
           <Card
             key={`story_${storyObj._id}`}
             _id={storyObj._id}

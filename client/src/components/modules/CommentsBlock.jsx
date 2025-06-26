@@ -27,15 +27,13 @@ const CommentsBlock = (props) => {
       <div className="story-comments">
         {props.comments.map((comment, idx) => (
           <SingleComment
-            key={comment._id}
+            key={`SingleComment_${comment._id}`}
             _id={comment._id}
             creator_name={comment.creator_name}
             content={comment.content}
           />
         ))}
-        {userId ? (
-          <NewComment storyId={props.story._id} addNewComment={props.addNewComment} />
-        ) : null}
+        {userId && <NewComment storyId={props.story._id} addNewComment={props.addNewComment} />}
       </div>
     </div>
   );

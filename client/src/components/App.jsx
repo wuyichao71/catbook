@@ -27,16 +27,19 @@ const App = () => {
   }, []);
 
   const handleLogin = (res) => {
+    console.log(res);
+
     const userToken = res.credential;
     post("/api/login", { token: userToken }).then((user) => {
-      console.log(user.name);
       setUserId(user._id);
+      console.log(user);
     });
   };
 
   const handleLogout = () => {
+    console.log("Logged out successfully!");
     post("/api/logout", {}).then((user) => {
-      console.log(user.name);
+      // console.log(user.name);
       setUserId(null);
     });
   };

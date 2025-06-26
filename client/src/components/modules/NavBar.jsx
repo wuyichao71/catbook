@@ -19,16 +19,16 @@ const NavBar = (props) => {
         <Link to="/" className="NavBar-link">
           Home
         </Link>
-        {userId ? (
+        {userId && (
           <Link to={`/profile/${userId}`} className="NavBar-link">
             Profile
           </Link>
-        ) : (
-          <></>
         )}
-
         {userId ? (
-          <button onClick={props.handleLogout} className="NavBar-logoutButton">
+          <button
+            onClick={props.handleLogout}
+            className="NavBar-link NavBar-login u-inlineBlock NavBar-logoutButton"
+          >
             Log out
           </button>
         ) : (

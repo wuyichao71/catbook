@@ -17,6 +17,10 @@
 .NavBar-logoutButton {
   border: 0;
   background-color: white;
+  height: 40px;
+  cursor: pointer;
+  border-radius: var(--xs);
+  font-size: var(--m);
 }
 
 .NavBar-link,

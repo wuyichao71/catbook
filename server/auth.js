@@ -22,7 +22,7 @@ const getOrCreateUser = async (user) => {
 };
 
 const login = (req, res) => {
-  console.log(req.user);
+  // console.log(req.user);
   verify(req.body.token)
     .then(getOrCreateUser)
     .then((user) => {
@@ -39,11 +39,12 @@ const login = (req, res) => {
 };
 
 const logout = (req, res) => {
-  console.log(`Logged out as ${req.user.name}`);
+  // console.log(`Logged out as ${req.user.name}`);
   // console.log(`${req.user.name}`);
   req.session.user = null;
+  res.send({});
   // console.log(`${req.user.name}`);
-  res.send({ name: req.user.name });
+  // res.send({ name: req.user.name });
 };
 
 const populateCurrentUser = (req, res, next) => {
