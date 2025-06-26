@@ -39,7 +39,7 @@ const login = (req, res) => {
 };
 
 const logout = (req, res) => {
-  // console.log(`Logged out as ${req.user.name}`);
+  console.log(`Logged out as ${req.user.name}`);
   // console.log(`${req.user.name}`);
   req.session.user = null;
   res.send({});

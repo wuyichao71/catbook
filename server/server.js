@@ -35,23 +35,41 @@ run().catch(console.dir);
 const app = express();
 
 app.use(express.json());
-// app.use(
-//   session({
-//     secret: "session-secret",
-//     resave: false,
-//     saveUninitialized: false,
-//   })
-// );
 
-app.use(cors({ origin: "http://localhost:5174", credentials: true }));
+const allowedOrigins = [
+  "http://localhost:5174",
+  "https://wuyichao71.github.io",
+  "https://catbook-netlify.netlify.app",
+];
 
 app.use(
-  cookieSession({
-    name: "catbook_session",
-    keys: ["session-secret"],
-    maxAge: 24 * 60 * 60 * 1000,
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
   })
 );
+
+app.use(
+  session({
+    secret: "session-secret",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+
+// app.use(
+//   cookieSession({
+//     name: "catbook_session",
+//     keys: ["session-secret"],
+//     maxAge: 24 * 60 * 60 * 1000,
+//   })
+// );
 
 app.use("/catbook", express.static(path.resolve(__dirname, "..", "client", "dist")));
 
