@@ -78,9 +78,9 @@ app.use(
 //   })
 // );
 
-app.use("/catbook", express.static(path.resolve(__dirname, "..", "client", auth.outdir)));
+app.use(express.static(path.resolve(__dirname, "..", "client", auth.outdir)));
 
-app.get("/catbook/*", (req, res) => {
+app.get("/", (req, res) => {
   res.sendFile(path.resolve(__dirname, "..", "client", auth.outdir, "index.html"));
 });
 
