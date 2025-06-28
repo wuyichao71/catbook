@@ -83,6 +83,7 @@ const githubCallback = (req, res) => {
   // res.send({ code: code });
   fetch(github_token_uri, {
     method: "POST",
+    credentials: "include",
     headers: { "Content-type": "application/json", Accept: "application/json" },
     body: JSON.stringify({
       client_id: github_client_id,
