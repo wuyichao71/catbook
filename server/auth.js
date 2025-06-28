@@ -1,6 +1,6 @@
 require("dotenv").config();
 let runType = "development";
-if (process.argv[2] === "production") {
+if (typeof process.argv[2] !== "undefined") {
   runType = process.argv[2];
 }
 require("dotenv").config({ path: `.env.${runType}` });
@@ -17,6 +17,7 @@ const github_callback_uri = `${BASENAME}/api/auth/github/callback`;
 const github_token_uri = "https://github.com/login/oauth/access_token";
 const github_user_uri = "https://api.github.com/user";
 const github_base = process.env.VITE_BASE;
+const outdir = process.env.VITE_OUTDIR;
 console.log(github_client_id);
 console.log(github_client_secret);
 console.log(github_callback_uri);
@@ -131,4 +132,5 @@ module.exports = {
   githubCallback,
   logout,
   populateCurrentUser,
+  outdir,
 };

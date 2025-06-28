@@ -38,6 +38,7 @@ app.use(express.json());
 
 const allowedOrigins = [
   "http://localhost:5174",
+  "http://localhost:3001",
   "https://wuyichao71.github.io",
   "https://catbook-netlify.netlify.app",
   "https://catbook-api.onrender.com",
@@ -77,11 +78,17 @@ app.use(
 //   })
 // );
 
-app.use("/catbook", express.static(path.resolve(__dirname, "..", "client", "dist")));
+app.use("/catbook", express.static(path.resolve(__dirname, "..", "client", auth.outdir)));
 
 app.get("/catbook/*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "..", "client", "dist", "index.html"));
+  res.sendFile(path.resolve(__dirname, "..", "client", auth.outdir, "index.html"));
 });
+
+// app.use(express.static(path.resolve(__dirname, "..", "client", "dist")));
+
+// app.get("/", (req, res) => {
+//   res.sendFile(path.resolve(__dirname, "..", "client", "dist", "index.html"));
+// });
 
 app.use(auth.populateCurrentUser);
 

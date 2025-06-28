@@ -5,10 +5,16 @@
   "main": "server/server.js",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && cpy client/dist/index.html . --rename=404.html ",
-    "netlify": "vite build --mode netlify",
-    "preview": "vite preview",
     "start": "nodemon",
+    "preview": "vite preview",
+
+    "serverbuild": "vite build --mode server",
+    "renderbuild": "vite build --mode render",
+    "netlifybuild": "vite build --mode netlify",
+    "githubbuild": "vite build && cpy client/dist/index.html . --rename=404.html ",
+    
+    
+    "server": "nodemon server/server.js server",
     "production": "nodemon server/server.js production",
     "deploy": "gh-pages -d client/dist"
   },
