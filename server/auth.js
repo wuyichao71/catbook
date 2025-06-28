@@ -111,6 +111,7 @@ const githubCallback = (req, res) => {
 
       req.session.user = user;
       res.redirect(github_base);
+      // res.redirect("http://localhost:3001/catbook/");
     })
     .catch((err) => {
       console.log(`Failed to log in: ${err}`);
