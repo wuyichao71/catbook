@@ -16,6 +16,7 @@ const github_authorize_uri = "https://github.com/login/oauth/authorize";
 const github_callback_uri = `${BASENAME}/api/auth/github/callback`;
 const github_token_uri = "https://github.com/login/oauth/access_token";
 const github_user_uri = "https://api.github.com/user";
+const github_base = process.env.VITE_BASE;
 console.log(github_client_id);
 console.log(github_client_secret);
 console.log(github_callback_uri);
@@ -57,7 +58,12 @@ const login = (req, res) => {
 };
 
 const logout = (req, res) => {
-  console.log(`Logged out as ${req.user.name}`);
+  if (req.user && req.user.name) {
+    console.log(`Logged out as ${req.user.name}`);
+  } else {
+    console.log("Logged out as undefined");
+  }
+
   // console.log(`${req.user.name}`);
   req.session.user = null;
   res.send({});
@@ -66,13 +72,14 @@ const logout = (req, res) => {
 };
 
 const githubLogin = (req, res) => {
+  console.log(req.hostname);
   const uri = `${github_authorize_uri}?client_id=${github_client_id}&redirect_uri=${github_callback_uri}`;
   res.redirect(uri);
 };
 
 const githubCallback = (req, res) => {
   const code = req.query.code;
-  console.log(code);
+  // console.log(code);
   // res.send({ code: code });
   fetch(github_token_uri, {
     method: "POST",
@@ -91,10 +98,10 @@ const githubCallback = (req, res) => {
       });
     })
     .then((res) => res.json())
-    .then((res) => {
-      console.log(res);
-      return res;
-    })
+    // .then((res) => {
+    //   console.log(res);
+    //   return res;
+    // })
     .then((user) => {
       return { uid: user.id, name: user.name, from: "github" };
     })
@@ -103,7 +110,7 @@ const githubCallback = (req, res) => {
       console.log(`Logged in as ${user.name}`);
 
       req.session.user = user;
-      res.redirect("/");
+      res.redirect(github_base);
     })
     .catch((err) => {
       console.log(`Failed to log in: ${err}`);
