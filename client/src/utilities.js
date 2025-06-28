@@ -15,10 +15,6 @@ const formatParams = (params) => {
 const convertToJSON = (res) => {
   if (!res.ok) {
     throw `API request failed with response status ${res.status} and text: ${res.statusText}`;
-    // res.json().then((result) => {
-    //   console.error(`${result.err}`);
-    //   throw `API request failed with response status ${res.status} and text: ${res.statusText}`;
-    // });
   }
 
   return res
@@ -53,3 +49,7 @@ export function post(endpoint, params = {}) {
       throw `POST request to ${endpoint} failed with error:\n${error}`;
     });
 }
+
+export const jumpLink = (endpoint) => {
+  return BASE_URL + endpoint;
+};

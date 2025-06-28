@@ -9,6 +9,7 @@
     "netlify": "vite build --mode netlify",
     "preview": "vite preview",
     "start": "nodemon",
+    "production": "nodemon server/server.js production",
     "deploy": "gh-pages -d client/dist"
   },
   "repository": {

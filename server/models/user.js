@@ -2,7 +2,8 @@ const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
   name: String,
-  googleid: String,
+  uid: String,
+  from: String,
 });
 
 module.exports = mongoose.model("user", userSchema);
