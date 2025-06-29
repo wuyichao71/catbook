@@ -1,4 +1,7 @@
-# client/dist
+client/dist
+client/netlify
+client/server
+client/render
 node_modules/
 package-lock.json
 .DS_Store
