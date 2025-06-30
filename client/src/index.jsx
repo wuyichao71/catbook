@@ -31,6 +31,7 @@ const router = createBrowserRouter(
     <Route path="/" errorElement={<NotFound />} element={<App />}>
       <Route path="/" element={<Feed />} />
       <Route path="profile/:userId" element={<Profile />} />
+      <Route path="chatbook" element={<Chatbook />} />
     </Route>
   ),
   { basename: import.meta.env.VITE_BASENAME }
