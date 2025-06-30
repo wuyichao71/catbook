@@ -5,6 +5,7 @@ import App from "./components/App";
 import NotFound from "./components/pages/NotFound";
 import Feed from "./components/pages/Feed";
 import Profile from "./components/pages/Profile";
+import Chatbook from "./components/pages/Chatbook";
 // import { BASE } from "./utilities";
 // TODO (step5): uncomment the following imports from react-router-dom
 // import {

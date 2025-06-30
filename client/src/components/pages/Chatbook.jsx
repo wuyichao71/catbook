@@ -6,3 +6,5 @@ const Chatbook = () => {
 
   return <>{userId ? <p>Hello, world</p> : <div>Log in before using Chatbook</div>}</>;
 };
+
+export default Chatbook;
