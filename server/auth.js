@@ -112,6 +112,7 @@ const githubCallback = (req, res) => {
       console.log(`Logged in as ${user.name}`);
 
       req.session.user = user;
+      const uri = `${github_base}/github/callback?userId=${user._id}`;
       res.redirect(github_base);
       // res.redirect("http://localhost:3001/catbook/");
     })
