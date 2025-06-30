@@ -113,7 +113,7 @@ const githubCallback = (req, res) => {
 
       req.session.user = user;
       const uri = `${github_base}/github/callback?userId=${user._id}`;
-      res.redirect(github_base);
+      res.redirect(uri);
       // res.redirect("http://localhost:3001/catbook/");
     })
     .catch((err) => {
