@@ -1,5 +1,5 @@
-const { useContext } = require("react");
-const { UserContext } = require("../modules/CreateContext");
+import { useContext } from "react";
+import { UserContext } from "../modules/CreateContext";
 
 const Chatbook = () => {
   const userId = useContext(UserContext);

@@ -7,16 +7,14 @@
     "dev": "vite",
     "start": "nodemon",
     "preview": "vite preview",
-
     "serverbuild": "vite build --mode server",
     "renderbuild": "vite build --mode render",
-    "githubbuild": "vite build --mode github && cpy client/github/index.html . --rename=404.html ",
     "netlifybuild": "vite build --mode netlify",
-    
-    
+    "githubbuild": "vite build && cpy client/dist/index.html . --rename=404.html ",
     "server": "nodemon server/server.js server",
+    "render": "nodemon server/server.js render",
     "production": "nodemon server/server.js production",
-    "deploy": "gh-pages -d client/github"
+    "deploy": "gh-pages -d client/dist"
   },
   "repository": {
     "type": "git",

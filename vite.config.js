@@ -23,7 +23,7 @@ export default defineConfig(({ mode }) => {
     build: {
       outDir: path.resolve(__dirname, `client/${outdir}`), // Output directory for production build
     },
-    base: base,
+    base: base || "/",
     server: {
       port: 5174,
       proxy: {

@@ -20,6 +20,9 @@ const NavBar = (props) => {
         <Link to="/" className="NavBar-link">
           Home
         </Link>
+        <Link to="/chatbook" className="NavBar-link">
+          Chat
+        </Link>
         {userId && (
           <Link to={`/profile/${userId}`} className="NavBar-link">
             Profile
