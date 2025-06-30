@@ -5,6 +5,7 @@ import App from "./components/App";
 import NotFound from "./components/pages/NotFound";
 import Feed from "./components/pages/Feed";
 import Profile from "./components/pages/Profile";
+import Chatbook from "./components/pages/Chatbook";
 // import { BASE } from "./utilities";
 // TODO (step5): uncomment the following imports from react-router-dom
 // import {
@@ -31,6 +32,7 @@ const router = createBrowserRouter(
     <Route path="/" errorElement={<NotFound />} element={<App />}>
       <Route path="/" element={<Feed />} />
       <Route path="profile/:userId" element={<Profile />} />
+      <Route path="chatbook" element={<Chatbook />} />
     </Route>
   ),
   { basename: import.meta.env.VITE_BASENAME }
