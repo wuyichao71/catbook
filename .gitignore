@@ -1,4 +1,4 @@
-client
+client/github
 node_modules/
 package-lock.json
 .DS_Store

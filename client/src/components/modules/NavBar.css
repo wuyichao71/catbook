@@ -1,0 +1,84 @@
+.NavBar-container {
+  padding: var(--s) var(--m);
+  background-color: var(--primary);
+}
+
+.NavBar-title {
+  color: var(--white);
+  font-size: 20px;
+  vertical-align: middle;
+}
+
+.NavBar-linkContainer {
+  margin-left: var(--l);
+}
+
+.NavBar-loginContainer {
+  position: absolute;
+  height: 32px;
+}
+
+.NavBar-loginLogout {
+  border: 0;
+  padding: 0;
+  /* height: 40px; */
+  cursor: pointer;
+  /* border-radius: var(--xs); */
+  /* font-size: var(--m); */
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+  font-size: var(--m);
+  /* vertical-align: middle; */
+  background-color: transparent;
+}
+
+.NavBar-loginBlock {
+  position:absolute;
+  transform-origin: center;
+  visibility: hidden;
+  /* border: 2px solid black; */
+  padding: var(--m);
+  background-color: var(--primary);
+  flex-direction: column;
+  border-radius: var(--s);
+  gap: var(--s);
+  display: flex;
+  transform: translate(-45%, 8px);
+  /* transform: translateY(10px); */
+  opacity: 0;
+  /* transition: opacity 0.2s ease-in-out; */
+}
+
+.NavBar-loginContainer:hover .NavBar-loginBlock {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.NavBar-link,
+.NavBar-link:visited {
+  color: var(--white);
+  opacity: 0.6;
+  text-decoration: none;
+  vertical-align: middle;
+  /* transition: opacity 0.5s, color 0.5s; */
+}
+
+.NavBar-link:hover {
+  opacity: 0.8;
+  /* opacity: 1; */
+  /* color: black; */
+}
+
+.NavBar-link.NavBar-login {
+  opacity: 1;
+  color: black;
+}
+
+.NavBar-link + .NavBar-link {
+  margin-left: var(--m);
+}
+
+.NavBar-link + .NavBar-loginContainer {
+  margin-left: var(--m);
+}
