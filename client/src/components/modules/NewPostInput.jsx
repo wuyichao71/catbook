@@ -79,4 +79,11 @@ const NewComment = (props) => {
   return <NewPostInput defaultText="New Comment" onSubmit={addComment} />;
 };
 
-export { NewStory, NewComment };
+const NewMessage = (props) => {
+  const addMessage = (value) => {
+    console.log(value);
+  };
+  return <NewPostInput defaultText="New Message" onSubmit={addMessage} />;
+};
+
+export { NewStory, NewComment, NewMessage };
