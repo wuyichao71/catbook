@@ -50,9 +50,9 @@ form {
   flex-direction: column;
 }
 
-.u-flex + .u-flex {
+/* .u-flex + .u-flex {
   margin: var(--xs);
-}
+} */
 
 .u-flex-justifyCenter {
   justify-content: center;

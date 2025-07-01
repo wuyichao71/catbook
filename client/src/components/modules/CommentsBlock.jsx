@@ -1,7 +1,7 @@
 import React from "react";
 import SingleComment from "./SingleComment";
 import { NewComment } from "./NewPostInput";
-import { UserContext } from "./CreateContext";
+import { UserContext } from "../context/UserContext";
 import { useContext } from "react";
 // import "./Card.css";
 // TODO (step9): import SingleComment and NewComment

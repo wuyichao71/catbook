@@ -5,7 +5,7 @@
   "main": "server/server.js",
   "scripts": {
     "dev": "vite",
-    "start": "nodemon",
+    "start": "nodemon server/server.js development",
     "preview": "vite preview",
     "serverbuild": "vite build --mode server",
     "renderbuild": "vite build --mode render",

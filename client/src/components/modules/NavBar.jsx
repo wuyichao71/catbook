@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
-import { UserContext } from "./CreateContext";
+import { UserContext } from "../context/UserContext";
 import GithubLogin from "./GithubLogin";
 // import { post, get } from "../../utilities";
 import "./NavBar.css";
@@ -20,14 +20,17 @@ const NavBar = (props) => {
         <Link to="/" className="NavBar-link">
           Home
         </Link>
-        <Link to="/chatbook" className="NavBar-link">
-          Chat
-        </Link>
+
         {userId && (
           <Link to={`/profile/${userId}`} className="NavBar-link">
             Profile
           </Link>
         )}
+
+        <Link to="/chat/" className="NavBar-link u-inlineBlock">
+          Chat
+        </Link>
+
         {userId ? (
           <button onClick={props.handleLogout} className="NavBar-link NavBar-loginLogout">
             Logout

@@ -1,0 +1,14 @@
+SingleMessage-container {
+  margin: 0 0 var(--xs);
+}
+
+SingleMessage-sender {
+  width: 106px;
+  margin-right: var(--xs);
+  flex-shrink: 0;
+}
+
+SingleMessage-content {
+  background: var(--primary-dim);
+  color: var(--white);
+}

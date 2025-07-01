@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { NewStory } from "../modules/NewPostInput";
 import Card from "../modules/Card";
 import { get, post } from "../../utilities";
-import { UserContext } from "../modules/CreateContext";
+import { UserContext } from "../context/UserContext";
 import { useContext } from "react";
 // TODO (step4): import NewStory
 // TODO (step6): remove SingleStory import, import Card

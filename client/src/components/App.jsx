@@ -6,7 +6,7 @@ import NavBar from "./modules/NavBar";
 // TODO (step5): import Outlet
 import { Outlet } from "react-router-dom";
 import { get, post } from "../utilities";
-import { UserContext } from "./modules/CreateContext";
+import { UserContext } from "./context/UserContext";
 
 // To use styles, import the necessary CSS files
 import "../utilities.css";
