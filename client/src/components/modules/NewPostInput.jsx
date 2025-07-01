@@ -30,7 +30,7 @@ const NewPostInput = (props) => {
     // setUserNameValue("");
   };
   return (
-    <div className="u-flex-column">
+    <div className="u-flexColumn">
       {/* <div className="u-flex">
         <p className="u-bold NewPostInput-userName">User: </p>
         <input

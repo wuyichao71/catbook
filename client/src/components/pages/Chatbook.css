@@ -1,0 +1,7 @@
+.Chatbook-container {
+  height: calc(100vh - 120px);
+}
+
+.Chatbook-chatContainer {
+  flex-grow: 1;
+}

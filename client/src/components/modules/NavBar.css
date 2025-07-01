@@ -33,7 +33,7 @@
 }
 
 .NavBar-loginBlock {
-  position:absolute;
+  position: absolute;
   transform-origin: center;
   visibility: hidden;
   /* border: 2px solid black; */
@@ -46,6 +46,7 @@
   transform: translate(-45%, 8px);
   /* transform: translateY(10px); */
   opacity: 0;
+  z-index: 1000;
   /* transition: opacity 0.2s ease-in-out; */
 }
 

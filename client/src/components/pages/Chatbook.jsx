@@ -51,7 +51,8 @@ const Chatbook = () => {
    * @property {UserObject} recipient
    */
 
-  const userId = useContext(UserContext);
+  // const userId = useContext(UserContext);
+  const userId = true;
 
   useEffect(() => {
     document.title = "Chatbook";
@@ -63,12 +64,16 @@ const Chatbook = () => {
 
   return (
     <>
-      <Chat
-        data={{
-          recipient: ALL_CHAT,
-          messages: TEST_MESSAGES,
-        }}
-      />
+      <div className="u-flex u-relative Chatbook-container">
+        <div className="Chatbook-chatContainer u-relative">
+          <Chat
+            data={{
+              recipient: ALL_CHAT,
+              messages: TEST_MESSAGES,
+            }}
+          />
+        </div>
+      </div>
     </>
   );
 };

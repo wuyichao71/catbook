@@ -1,15 +1,20 @@
-import "./Chat.css";
 import { NewMessage } from "./NewPostInput";
 import SingleMessage from "./SingleMessage";
 
+import "./Chat.css";
+
 const Chat = (props) => {
   return (
-    <div>
+    <div className="u-flexColumn Chat-container">
       <h3>Chatting with {props.data.recipient.name}</h3>
-      {props.data.messages.map((m, i) => (
-        <SingleMessage message={m} key={i} />
-      ))}
-      <NewMessage recepient={props.data.recepient} />
+      <div className="Chat-historyContainer">
+        {props.data.messages.map((m, i) => (
+          <SingleMessage message={m} key={i} />
+        ))}
+      </div>
+      <div className="Chat-newContainer">
+        <NewMessage recepient={props.data.recipient} />
+      </div>
     </div>
   );
 };
