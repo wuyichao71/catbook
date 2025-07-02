@@ -126,11 +126,20 @@ const populateCurrentUser = (req, res, next) => {
   next();
 };
 
+const ensureLoggedIn = (req, res, next) => {
+  if (!req.user) {
+    return res.status(404).send({ err: "not logged in!" });
+  }
+
+  next();
+};
+
 module.exports = {
   login,
   githubLogin,
   githubCallback,
   logout,
   populateCurrentUser,
+  ensureLoggedIn,
   outdir,
 };

@@ -78,10 +78,16 @@ app.use(
 //   })
 // );
 
-app.use(express.static(path.resolve(__dirname, "..", "client", auth.outdir)));
+app.use(auth.populateCurrentUser);
 
-app.get("/", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "..", "client", auth.outdir, "index.html"));
+app.use("/api", api);
+
+const reactPath = path.resolve(__dirname, "..", "client", auth.outdir);
+
+app.use(express.static(reactPath));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(reactPath, "index.html"));
 });
 
 // app.use(express.static(path.resolve(__dirname, "..", "client", "dist")));
@@ -89,10 +95,6 @@ app.get("/", (req, res) => {
 // app.get("/", (req, res) => {
 //   res.sendFile(path.resolve(__dirname, "..", "client", "dist", "index.html"));
 // });
-
-app.use(auth.populateCurrentUser);
-
-app.use("/api", api);
 
 app.all("*", (req, res) => {
   console.log(`Route not found: ${req.method} ${req.url}`);

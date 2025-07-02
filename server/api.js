@@ -3,6 +3,7 @@ const express = require("express");
 const Story = require("./models/story");
 const Comment = require("./models/comment");
 const User = require("./models/user");
+const Message = require("./models/message");
 const auth = require("./auth");
 
 const router = express.Router();
@@ -63,6 +64,28 @@ router.get("/user", (req, res) => {
       res.status(400).send({ message: "The user does not exist!" });
       console.log(err.message);
     });
+});
+
+router.get("/chat", (req, res) => {
+  const query = { "recipient._id": req.query.recipient_id };
+  Message.find(query).then((message) => {
+    res.send(message);
+  });
+});
+
+router.post("/message", auth.ensureLoggedIn, (req, res) => {
+  console.log(`Received a chat message from ${req.user.name}: ${req.body.content}`);
+
+  console.log(req.body.recipient);
+  const message = new Message({
+    recipient: req.body.recipient,
+    sender: {
+      _id: req.user._id,
+      name: req.user.name,
+    },
+    content: req.body.content,
+  });
+  message.save();
 });
 
 router.post("/login", auth.login);

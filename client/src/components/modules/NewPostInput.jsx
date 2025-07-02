@@ -81,7 +81,8 @@ const NewComment = (props) => {
 
 const NewMessage = (props) => {
   const addMessage = (value) => {
-    console.log(value);
+    // console.log(props.recipient);
+    props.addNewMessage && props.addNewMessage({ recipient: props.recipient, content: value });
   };
   return <NewPostInput defaultText="New Message" onSubmit={addMessage} />;
 };
