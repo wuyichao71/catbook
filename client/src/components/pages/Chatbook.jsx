@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/UserContext";
-import { NewMessage } from "../modules/NewPostInput";
 import Chat from "../modules/Chat";
 import { get } from "../../utilities";
 
