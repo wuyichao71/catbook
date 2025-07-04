@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useContext } from "react";
+// import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
-import { UserContext } from "../context/UserContext";
+// import { UserContext } from "../context/UserContext";
 import GithubLogin from "./GithubLogin";
 // import { post, get } from "../../utilities";
 import "./NavBar.css";
@@ -11,7 +11,7 @@ import "./NavBar.css";
  * The navigation bar at the top of all pages. Takes no props.
  */
 const NavBar = (props) => {
-  const userId = useContext(UserContext);
+  // const userId = useContext(UserContext);
   // const userId = props.userId;
   return (
     <nav className="NavBar-container">
@@ -21,8 +21,8 @@ const NavBar = (props) => {
           Home
         </Link>
 
-        {userId && (
-          <Link to={`/profile/${userId}`} className="NavBar-link">
+        {props.userId && (
+          <Link to={`/profile/${props.userId}`} className="NavBar-link">
             Profile
           </Link>
         )}
@@ -31,7 +31,7 @@ const NavBar = (props) => {
           Chat
         </Link>
 
-        {userId ? (
+        {props.userId ? (
           <button onClick={props.handleLogout} className="NavBar-link NavBar-loginLogout">
             Logout
           </button>

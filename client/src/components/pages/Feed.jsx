@@ -4,8 +4,9 @@ import React, { useEffect, useState } from "react";
 import { NewStory } from "../modules/NewPostInput";
 import Card from "../modules/Card";
 import { get, post } from "../../utilities";
-import { UserContext } from "../context/UserContext";
+// import { UserContext } from "../context/UserContext";
 import { useContext } from "react";
+import { useOutletContext } from "react-router-dom";
 // TODO (step4): import NewStory
 // TODO (step6): remove SingleStory import, import Card
 
@@ -35,14 +36,15 @@ const Feed = () => {
     //   creator_name: "creator name",
     //   content: "story content",
     // }
+    document.title = "News Feed";
     get("/api/story").then((res) => {
       const reversedStories = res.reverse();
       setStories(reversedStories);
     });
   }, []);
 
-  const userId = useContext(UserContext);
-
+  // const userId = useContext(UserContext);
+  const { userId } = useOutletContext();
   return (
     <div>
       {userId && <NewStory addNewStory={addNewStory} />}

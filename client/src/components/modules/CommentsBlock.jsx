@@ -1,8 +1,9 @@
 import React from "react";
 import SingleComment from "./SingleComment";
 import { NewComment } from "./NewPostInput";
-import { UserContext } from "../context/UserContext";
-import { useContext } from "react";
+// import { UserContext } from "../context/UserContext";
+// import { useContext } from "react";
+import { useOutletContext } from "react-router-dom";
 // import "./Card.css";
 // TODO (step9): import SingleComment and NewComment
 
@@ -21,7 +22,8 @@ import { useContext } from "react";
  * @param {ContentObject} story
  */
 const CommentsBlock = (props) => {
-  const userId = useContext(UserContext);
+  // const userId = useContext(UserContext);
+  const { userId } = useOutletContext();
   return (
     <div className="Card-commentSection">
       <div className="story-comments">

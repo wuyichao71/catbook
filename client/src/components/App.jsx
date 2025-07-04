@@ -6,7 +6,7 @@ import NavBar from "./modules/NavBar";
 // TODO (step5): import Outlet
 import { Outlet } from "react-router-dom";
 import { get, post } from "../utilities";
-import { UserContext } from "./context/UserContext";
+// import { UserContext } from "./context/UserContext";
 
 // To use styles, import the necessary CSS files
 import "../utilities.css";
@@ -55,16 +55,19 @@ const App = () => {
     // <> is like a <div>, but won't show
     // up in the DOM tree
     // <>
-    <UserContext.Provider value={userId}>
+    // <UserContext.Provider value={userId}>
+    <>
       <NavBar
         handleLogin={handleLogin}
         handleLogout={handleLogout}
+        userId={userId}
         // handleGithubLogin={handleGithubLogin}
       />
       <div className="App-container">
-        <Outlet />
+        <Outlet context={{ userId: userId }} />
       </div>
-    </UserContext.Provider>
+    </>
+    // </UserContext.Provider>
     // </>
   );
 };
