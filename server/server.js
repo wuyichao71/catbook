@@ -1,4 +1,5 @@
 require("dotenv").config();
+const http = require("http");
 const express = require("express");
 const session = require("express-session");
 // const cookieSession = require("cookie-session");
@@ -11,6 +12,8 @@ const cors = require("cors");
 
 const api = require("./api");
 const auth = require("./auth");
+
+const socketManager = require("./server-socket");
 
 const mongoConnectionURL = process.env.mongoURL;
 const databaseName = process.env.databaseName;
@@ -118,6 +121,8 @@ app.use((err, req, res, next) => {
 });
 
 const port = process.env.PORT || 3000;
-app.listen(port, () => {
+const server = http.Server(app);
+socketManager.init(server);
+server.listen(port, () => {
   console.log(`Server running on port: ${port}`);
 });

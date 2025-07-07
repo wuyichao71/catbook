@@ -8,4 +8,6 @@ console.log(endpoint);
 
 socket.on("connect", () => {
   post("/api/initsocket", { socketId: socket.id });
+  // console.log(`socket connected: ${socket.id}`);
+  // console.log("connected");
 });

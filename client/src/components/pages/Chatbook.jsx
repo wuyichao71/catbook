@@ -54,8 +54,8 @@ const ALL_CHAT = {
 
 const Chatbook = () => {
   // const userId = useContext(UserContext);
-  // const { userId } = useOutletContext();
-  const userId = true;
+  const { userId } = useOutletContext();
+  // const userId = true;
 
   const [activeChat, setActiveChat] = useState({
     recipient: ALL_CHAT,
@@ -85,8 +85,10 @@ const Chatbook = () => {
   useEffect(() => {
     document.title = "Chatbook";
     loadMessageHistory(ALL_CHAT);
+
+    socket.on("message", addMessage);
     return () => {
-      socket.off("connect", addMessage);
+      socket.off("message", addMessage);
     };
   }, []);
 

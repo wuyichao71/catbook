@@ -6,6 +6,8 @@ const User = require("./models/user");
 const Message = require("./models/message");
 const auth = require("./auth");
 
+const socketManager = require("./server-socket");
+
 const router = express.Router();
 router.get("/test", (req, res) => {
   console.log(`METHOD: ${req.method} ${req.url}`);
@@ -13,7 +15,7 @@ router.get("/test", (req, res) => {
 });
 
 router.get("/story", (req, res) => {
-  console.log(`METHOD: ${req.method} ${req.url}`);
+  // console.log(`METHOD: ${req.method} ${req.url}`);
   Story.find({}).then((stories) => {
     res.send(stories);
   });
@@ -36,7 +38,7 @@ router.post("/story", (req, res) => {
 });
 
 router.get("/comment", (req, res) => {
-  console.log(`METHOD: ${req.method} ${req.url}`);
+  // console.log(`METHOD: ${req.method} ${req.url}`);
   Comment.find({ parent: req.query.parent }).then((comments) => {
     res.send(comments);
   });
@@ -86,6 +88,15 @@ router.post("/message", auth.ensureLoggedIn, (req, res) => {
     content: req.body.content,
   });
   message.save();
+
+  socketManager.getIo().emit("message", message);
+  // res.send({});
+});
+
+router.post("/initsocket", (req, res) => {
+  if (req.user) {
+    socketManager.addUser(req.user, socketManager.getSocketFromSocketID(req.body.socketId));
+  }
 });
 
 router.post("/login", auth.login);
