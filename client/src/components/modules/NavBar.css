@@ -19,11 +19,11 @@
 }
 
 .NavBar-loginLogout {
-  border: 0;
-  padding: 0;
+  border: 1px solid white;
+  padding: 3px;
   /* height: 40px; */
   cursor: pointer;
-  /* border-radius: var(--xs); */
+  border-radius: var(--xs);
   /* font-size: var(--m); */
   font-family: "Open Sans", sans-serif;
   font-weight: 300;
@@ -43,7 +43,7 @@
   border-radius: var(--s);
   gap: var(--s);
   display: flex;
-  transform: translate(-45%, 8px);
+  transform: translate(-45%, 2px);
   /* transform: translateY(10px); */
   opacity: 0;
   z-index: 1000;

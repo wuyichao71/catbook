@@ -6,6 +6,7 @@ const userToSocketMap = {};
 const socketToUserMap = {};
 
 const getSocketFromSocketID = (socketid) => io.sockets.sockets.get(socketid);
+const getAllConnectedUsers = () => Object.values(socketToUserMap);
 
 const addUser = (user, socket) => {
   const oldSocket = userToSocketMap[user._id];
@@ -16,10 +17,10 @@ const addUser = (user, socket) => {
 
   userToSocketMap[user._id] = socket;
   socketToUserMap[socket.id] = user;
-
-  for (const key of Object.keys(socketToUserMap)) {
-    console.log(socketToUserMap[key].name, key);
-  }
+  io.emit("activeUsers", { activeUsers: getAllConnectedUsers() });
+  // for (const key of Object.keys(socketToUserMap)) {
+  //   console.log(socketToUserMap[key].name, key);
+  // }
 };
 
 module.exports = {
@@ -39,6 +40,7 @@ module.exports = {
   addUser: addUser,
 
   getSocketFromSocketID: getSocketFromSocketID,
+  getAllConnectedUsers: getAllConnectedUsers,
 
   getIo: () => io,
 };

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 // import { UserContext } from "../context/UserContext";
 import Chat from "../modules/Chat";
+import ChatList from "../modules/ChatList";
 import { get } from "../../utilities";
 import { useOutletContext } from "react-router-dom";
 import { socket } from "../../socket-client";
@@ -28,34 +29,12 @@ const ALL_CHAT = {
   name: "ALL CHAT",
 };
 
-// const TEST_MESSAGES = [
-//   {
-//     sender: {
-//       _id: 0,
-//       name: "Abby",
-//     },
-//     content: "tell me why",
-//   },
-//   {
-//     sender: {
-//       _id: 0,
-//       name: "Abby",
-//     },
-//     content: "aint nothin but a heartache",
-//   },
-//   {
-//     sender: {
-//       _id: 0,
-//       name: "Abby",
-//     },
-//     content: "tElL mE whYyY",
-//   },
-// ];
-
 const Chatbook = () => {
   // const userId = useContext(UserContext);
   const { userId } = useOutletContext();
   // const userId = true;
+
+  const [activeUsers, setActiveUsers] = useState([]);
 
   const [activeChat, setActiveChat] = useState({
     recipient: ALL_CHAT,
@@ -92,6 +71,10 @@ const Chatbook = () => {
     };
   }, []);
 
+  const setActiveUser = (user) => {
+    console.log(`setting active user to ${user.name}`);
+  };
+
   if (!userId) {
     return <div>Log in before using Chatbook</div>;
   }
@@ -99,6 +82,14 @@ const Chatbook = () => {
   return (
     <>
       <div className="u-flex u-relative Chatbook-container">
+        <div className="Chatbook-userList">
+          <ChatList
+            setActiveUser={setActiveUser}
+            userId={userId}
+            users={activeUsers}
+            active={activeChat.recipient}
+          />
+        </div>
         <div className="Chatbook-chatContainer u-relative">
           <Chat data={activeChat} />
         </div>

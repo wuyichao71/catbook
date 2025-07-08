@@ -1,0 +1,14 @@
+.SingleUser-container {
+    background-color: var(--white);
+    border-radius: var(--xs);
+    padding: var(--m) var(--l);
+    margin-bottom: var(--s);
+}
+
+.SingleUser-container:hover {
+    background-color: var(--medgrey);
+}
+
+.SingleUser-container--active {
+    background-color: var(--grey);
+}

@@ -93,6 +93,10 @@ router.post("/message", auth.ensureLoggedIn, (req, res) => {
   // res.send({});
 });
 
+router.get("/activeUsers", (req, res) => {
+  res.send({ activeUsers: socketManager.getAllConnectedUsers });
+});
+
 router.post("/initsocket", (req, res) => {
   if (req.user) {
     socketManager.addUser(req.user, socketManager.getSocketFromSocketID(req.body.socketId));
