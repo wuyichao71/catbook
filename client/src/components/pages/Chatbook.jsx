@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { act, useEffect, useState } from "react";
 // import { UserContext } from "../context/UserContext";
 import Chat from "../modules/Chat";
 import ChatList from "../modules/ChatList";
@@ -41,19 +41,10 @@ const Chatbook = () => {
     messages: [],
   });
 
-  const addMessage = (message) => {
-    setActiveChat((prevActiveChat) => {
-      return {
-        recipient: prevActiveChat.recipient,
-        messages: prevActiveChat.messages.concat(message),
-      };
-    });
-  };
-
   const loadMessageHistory = (recipient) => {
     // console.log(recipient);
     get("/api/chat", { recipient_id: recipient._id }).then((messages) => {
-      console.log(messages);
+      // console.log(messages);
       setActiveChat({
         recipient: recipient,
         messages: messages,
@@ -63,22 +54,68 @@ const Chatbook = () => {
 
   useEffect(() => {
     document.title = "Chatbook";
-    loadMessageHistory(ALL_CHAT);
+  }, []);
 
+  useEffect(() => {
+    loadMessageHistory(activeChat.recipient);
+  }, [activeChat.recipient]);
+
+  useEffect(() => {
+    const addMessage = (data) => {
+      if (
+        (data.recipient._id === activeChat.recipient._id && data.sender._id === userId) ||
+        (data.recipient._id === userId && data.sender._id === activeChat.recipient._id) ||
+        (data.recipient._id === ALL_CHAT._id && activeChat.recipient._id === ALL_CHAT._id)
+      ) {
+        setActiveChat((prevActiveChat) => {
+          return {
+            recipient: prevActiveChat.recipient,
+            messages: prevActiveChat.messages.concat(data),
+          };
+        });
+      }
+    };
     socket.on("message", addMessage);
     return () => {
       socket.off("message", addMessage);
     };
+  }, [activeChat.recipient._id, userId]);
+
+  useEffect(() => {
+    const callback = (data) => {
+      setActiveUsers([ALL_CHAT].concat(data.activeUsers));
+    };
+    socket.on("activeUsers", callback);
+    return () => {
+      socket.off("activeUsers", callback);
+    };
+  }, []);
+
+  useEffect(() => {
+    get("/api/activeUsers").then((data) => {
+      if (userId) {
+        setActiveUsers([ALL_CHAT].concat(data.activeUsers));
+      }
+    });
   }, []);
 
   const setActiveUser = (user) => {
-    console.log(`setting active user to ${user.name}`);
+    if (user._id === activeChat.recipient._id) {
+      return; // Already active
+    }
+    // console.log("setActiveUser", user);
+    // console.log(userId);
+    setActiveChat({
+      recipient: user,
+      messages: [],
+    });
   };
 
   if (!userId) {
     return <div>Log in before using Chatbook</div>;
   }
 
+  // console.log("activeUsers", activeUsers);
   return (
     <>
       <div className="u-flex u-relative Chatbook-container">

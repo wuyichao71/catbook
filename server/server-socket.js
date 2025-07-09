@@ -6,6 +6,8 @@ const userToSocketMap = {};
 const socketToUserMap = {};
 
 const getSocketFromSocketID = (socketid) => io.sockets.sockets.get(socketid);
+const getSocketFromUserID = (userid) => userToSocketMap[userid];
+const getUserFromSocketID = (socketid) => socketToUserMap[socketid];
 const getAllConnectedUsers = () => Object.values(socketToUserMap);
 
 const addUser = (user, socket) => {
@@ -18,28 +20,33 @@ const addUser = (user, socket) => {
   userToSocketMap[user._id] = socket;
   socketToUserMap[socket.id] = user;
   io.emit("activeUsers", { activeUsers: getAllConnectedUsers() });
-  // for (const key of Object.keys(socketToUserMap)) {
-  //   console.log(socketToUserMap[key].name, key);
-  // }
+};
+
+const removeUser = (user, socket) => {
+  if (user) {
+    delete userToSocketMap[user._id];
+  }
+  delete socketToUserMap[socket.id];
+  io.emit("activeUsers", { activeUsers: getAllConnectedUsers() });
 };
 
 module.exports = {
   init: (http) => {
     io = require("socket.io")(http);
     io.on("connection", (socket) => {
-      console.log(`connected, ${socket.id}`);
+      console.log(`socket has connected ${socket.id}`);
       socket.on("disconnect", (reason) => {
-        console.log(`disconnected, ${socket.id}`);
+        const user = getUserFromSocketID(socket.id);
+        removeUser(user, socket);
       });
     });
-    // io.on("connect", (socket) => {
-    //   console.log(`Bhello, ${socket.id}`);
-    //   socket.on("disconnect", (reason) => {});
-    // });
   },
   addUser: addUser,
+  removeUser: removeUser,
 
   getSocketFromSocketID: getSocketFromSocketID,
+  getSocketFromUserID: getSocketFromUserID,
+  getUserFromSocketID: getUserFromSocketID,
   getAllConnectedUsers: getAllConnectedUsers,
 
   getIo: () => io,

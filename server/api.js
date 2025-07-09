@@ -69,16 +69,28 @@ router.get("/user", (req, res) => {
 });
 
 router.get("/chat", (req, res) => {
-  const query = { "recipient._id": req.query.recipient_id };
-  Message.find(query).then((message) => {
-    res.send(message);
-  });
+  if (!req.user) {
+    res.send({});
+    return;
+  }
+  let query;
+  if (req.query.recipient_id === "ALL_CHAT") {
+    query = { "recipient._id": req.query.recipient_id };
+  } else {
+    query = {
+      $or: [
+        { "sender._id": req.user._id, "recipient._id": req.query.recipient_id },
+        { "sender._id": req.query.recipient_id, "recipient._id": req.user._id },
+      ],
+    };
+  }
+  Message.find(query).then((message) => res.send(message));
 });
 
 router.post("/message", auth.ensureLoggedIn, (req, res) => {
   console.log(`Received a chat message from ${req.user.name}: ${req.body.content}`);
 
-  console.log(req.body.recipient);
+  // console.log(req.body.recipient);
   const message = new Message({
     recipient: req.body.recipient,
     sender: {
@@ -88,19 +100,29 @@ router.post("/message", auth.ensureLoggedIn, (req, res) => {
     content: req.body.content,
   });
   message.save();
-
-  socketManager.getIo().emit("message", message);
-  // res.send({});
+  if (req.body.recipient._id === "ALL_CHAT") {
+    socketManager.getIo().emit("message", message);
+  } else {
+    console.log(message);
+    console.log(req.user._id);
+    console.log(req.body.recipient._id);
+    socketManager.getSocketFromUserID(req.user._id)?.emit("message", message);
+    if (req.user._id !== req.body.recipient._id) {
+      socketManager.getSocketFromUserID(req.body.recipient._id)?.emit("message", message);
+    }
+  }
+  res.send({});
 });
 
 router.get("/activeUsers", (req, res) => {
-  res.send({ activeUsers: socketManager.getAllConnectedUsers });
+  res.send({ activeUsers: socketManager.getAllConnectedUsers() });
 });
 
 router.post("/initsocket", (req, res) => {
   if (req.user) {
     socketManager.addUser(req.user, socketManager.getSocketFromSocketID(req.body.socketId));
   }
+  res.send({});
 });
 
 router.post("/login", auth.login);

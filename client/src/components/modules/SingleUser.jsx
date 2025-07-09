@@ -1,3 +1,4 @@
+import "./SingleUser.css";
 const SingleUser = (props) => {
   return (
     <div
@@ -8,7 +9,7 @@ const SingleUser = (props) => {
         props.setActiveUser(props.user);
       }}
     >
-      props.user.name
+      {props.user.name}
     </div>
   );
 };

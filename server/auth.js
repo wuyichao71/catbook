@@ -6,6 +6,7 @@ if (typeof process.argv[2] !== "undefined") {
 require("dotenv").config({ path: `.env.${runType}` });
 const User = require("./models/user");
 const { OAuth2Client } = require("google-auth-library");
+const socketManager = require("./server-socket");
 const CLIENT_ID = process.env.VITE_GOOGLE_CLIENT_ID;
 const BASENAME = process.env.VITE_REDIRECT_BASE;
 
@@ -18,9 +19,9 @@ const github_token_uri = "https://github.com/login/oauth/access_token";
 const github_user_uri = "https://api.github.com/user";
 const github_base = process.env.VITE_BASE;
 const outdir = process.env.VITE_OUTDIR;
-console.log(github_client_id);
-console.log(github_client_secret);
-console.log(github_callback_uri);
+// console.log(github_client_id);
+// console.log(github_client_secret);
+// console.log(github_callback_uri);
 
 const verify = async (token) => {
   return client
@@ -59,17 +60,12 @@ const login = (req, res) => {
 };
 
 const logout = (req, res) => {
-  if (req.user && req.user.name) {
-    console.log(`Logged out as ${req.user.name}`);
-  } else {
-    console.log("Logged out as undefined");
+  const userSocket = socketManager.getSocketFromUserID(req.user._id);
+  if (userSocket) {
+    socketManager.removeUser(req.user, userSocket);
   }
-
-  // console.log(`${req.user.name}`);
   req.session.user = null;
   res.send({});
-  // console.log(`${req.user.name}`);
-  // res.send({ name: req.user.name });
 };
 
 const githubLogin = (req, res) => {

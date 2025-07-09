@@ -63,6 +63,14 @@ form {
   align-items: center;
 }
 
+.u-itemRight {
+  margin-left: auto;
+}
+
+.u-textRight {
+  text-align: right;
+}
+
 .u-inlineBlock {
   display: inline-block;
 }
