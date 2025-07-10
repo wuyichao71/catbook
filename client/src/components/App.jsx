@@ -7,6 +7,7 @@ import NavBar from "./modules/NavBar";
 import { Outlet } from "react-router-dom";
 import { get, post } from "../utilities";
 import { socket } from "../socket-client";
+import Game from "./pages/Game";
 // import { UserContext } from "./context/UserContext";
 
 // To use styles, import the necessary CSS files

@@ -30,6 +30,9 @@ const NavBar = (props) => {
         <Link to="/chat/" className="NavBar-link u-inlineBlock">
           Chat
         </Link>
+        <Link to="/game/" className="NavBar-link u-inlineBlock">
+          Game
+        </Link>
 
         {props.userId ? (
           <button onClick={props.handleLogout} className="NavBar-link NavBar-loginLogout">
