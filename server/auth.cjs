@@ -4,9 +4,9 @@ if (typeof process.argv[2] !== "undefined") {
   runType = process.argv[2];
 }
 require("dotenv").config({ path: `.env.${runType}` });
-const User = require("./models/user");
+const User = require("./models/user.cjs");
 const { OAuth2Client } = require("google-auth-library");
-const socketManager = require("./server-socket");
+const socketManager = require("./server-socket.cjs");
 const CLIENT_ID = process.env.VITE_GOOGLE_CLIENT_ID;
 const BASENAME = process.env.VITE_REDIRECT_BASE;
 

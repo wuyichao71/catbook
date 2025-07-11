@@ -2,18 +2,18 @@
   "name": "catbook-react",
   "version": "1.0.0",
   "description": "",
-  "main": "server/server.js",
+  "main": "server/server.cjs",
   "scripts": {
     "dev": "vite",
-    "start": "nodemon server/server.js development",
+    "start": "nodemon server/server.cjs development",
     "preview": "vite preview",
     "serverbuild": "vite build --mode server",
     "renderbuild": "vite build --mode render",
     "netlifybuild": "vite build --mode netlify",
     "githubbuild": "vite build && cpy client/dist/index.html . --rename=404.html ",
-    "server": "nodemon server/server.js server",
-    "render": "nodemon server/server.js render",
-    "production": "nodemon server/server.js production",
+    "server": "nodemon server/server.cjs server",
+    "render": "nodemon server/server.cjs render",
+    "production": "nodemon server/server.cjs production",
     "deploy": "gh-pages -d client/dist"
   },
   "repository": {
@@ -52,9 +52,13 @@
     "url-loader": "^4.1.1"
   },
   "devDependencies": {
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
     "@vitejs/plugin-react-swc": "^3.0.0",
     "cpy-cli": "^5.0.0",
+    "typescript": "^5.8.3",
     "vite": "^6.3.5",
     "vite-plugin-svgr": "^4.3.0"
-  }
+  },
+  "type": "module"
 }

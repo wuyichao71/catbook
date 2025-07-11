@@ -1,12 +1,12 @@
 const express = require("express");
 
-const Story = require("./models/story");
-const Comment = require("./models/comment");
-const User = require("./models/user");
-const Message = require("./models/message");
-const auth = require("./auth");
+const Story = require("./models/story.cjs");
+const Comment = require("./models/comment.cjs");
+const User = require("./models/user.cjs");
+const Message = require("./models/message.cjs");
+const auth = require("./auth.cjs");
 
-const socketManager = require("./server-socket");
+const socketManager = require("./server-socket.cjs");
 
 const router = express.Router();
 router.get("/test", (req, res) => {

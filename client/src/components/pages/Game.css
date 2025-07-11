@@ -1,0 +1,7 @@
+.Game-board {
+    display: flex;
+}
+
+.Game-link {
+    margin: 0 var(--l);
+}

@@ -10,10 +10,10 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 // const { fileURLToPath } = require("url");
 
-const api = require("./api");
-const auth = require("./auth");
+const api = require("./api.cjs");
+const auth = require("./auth.cjs");
 
-const socketManager = require("./server-socket");
+const socketManager = require("./server-socket.cjs");
 
 const mongoConnectionURL = process.env.mongoURL;
 const databaseName = process.env.databaseName;

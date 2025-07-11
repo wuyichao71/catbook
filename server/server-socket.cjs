@@ -1,4 +1,4 @@
-const { disconnect } = require("mongoose");
+const gameLogic = require("./game-logic.cjs");
 
 let io;
 
@@ -10,8 +10,23 @@ const getSocketFromUserID = (userid) => userToSocketMap[userid];
 const getUserFromSocketID = (socketid) => socketToUserMap[socketid];
 const getAllConnectedUsers = () => Object.values(socketToUserMap);
 
+const sendGameState = () => {
+  io.emit("update", gameLogic.gameState);
+};
+
+const startRunningGame = () => {
+  setInterval(() => {
+    gameLogic.updateGameState();
+    sendGameState();
+  }, 1000);
+};
+
+startRunningGame();
+
 const addUser = (user, socket) => {
   const oldSocket = userToSocketMap[user._id];
+
+  gameLogic.spawnPlayer(user._id);
   if (oldSocket && oldSocket != socket) {
     oldSocket.disconnect();
     delete socketToUserMap[oldSocket.id];

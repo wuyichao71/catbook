@@ -24,6 +24,9 @@ export default defineConfig(({ mode }) => {
       outDir: path.resolve(__dirname, `client/${outdir}`), // Output directory for production build
     },
     base: base || "/",
+    // esbuild: {
+    //   tsconfigRaw: "./tsconfig.json",
+    // },
     server: {
       port: 5174,
       proxy: {
