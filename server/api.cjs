@@ -8,6 +8,8 @@ const auth = require("./auth.cjs");
 
 const socketManager = require("./server-socket.cjs");
 
+const gameLogic = require("./game-logic.cjs");
+
 const router = express.Router();
 router.get("/test", (req, res) => {
   console.log(`METHOD: ${req.method} ${req.url}`);
@@ -103,9 +105,6 @@ router.post("/message", auth.ensureLoggedIn, (req, res) => {
   if (req.body.recipient._id === "ALL_CHAT") {
     socketManager.getIo().emit("message", message);
   } else {
-    // console.log(message);
-    // console.log(req.user._id);
-    // console.log(req.body.recipient._id);
     socketManager.getSocketFromUserID(req.user._id)?.emit("message", message);
     if (req.user._id !== req.body.recipient._id) {
       socketManager.getSocketFromUserID(req.body.recipient._id)?.emit("message", message);
@@ -121,6 +120,21 @@ router.get("/activeUsers", (req, res) => {
 router.post("/initsocket", (req, res) => {
   if (req.user) {
     socketManager.addUser(req.user, socketManager.getSocketFromSocketID(req.body.socketId));
+  }
+  res.send({});
+});
+
+router.post("/spawn", (req, res) => {
+  gameLogic.gameState.winner = null;
+  if (req.user) {
+    socketManager.addUserToGame(req.user);
+  }
+  res.send({});
+});
+
+router.post("/despawn", (req, res) => {
+  if (req.user) {
+    socketManager.removeUserFromGame(req.user);
   }
   res.send({});
 });

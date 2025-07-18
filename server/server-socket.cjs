@@ -18,16 +18,22 @@ const startRunningGame = () => {
   setInterval(() => {
     gameLogic.updateGameState();
     sendGameState();
-  }, 1000);
+  }, 1000 / 60);
 };
 
 startRunningGame();
 
+const addUserToGame = (user) => {
+  gameLogic.spawnPlayer(user._id);
+};
+
+const removeUserFromGame = (user) => {
+  gameLogic.removePlayer(user._id);
+};
+
 const addUser = (user, socket) => {
   const oldSocket = userToSocketMap[user._id];
-
-  gameLogic.spawnPlayer(user._id);
-  if (oldSocket && oldSocket != socket) {
+  if (oldSocket && oldSocket.id !== socket.id) {
     oldSocket.disconnect();
     delete socketToUserMap[oldSocket.id];
   }
@@ -54,6 +60,10 @@ module.exports = {
         const user = getUserFromSocketID(socket.id);
         removeUser(user, socket);
       });
+      socket.on("move", (dir) => {
+        const user = getUserFromSocketID(socket.id);
+        if (user) gameLogic.movePlayer(user._id, dir);
+      });
     });
   },
   addUser: addUser,
@@ -63,6 +73,7 @@ module.exports = {
   getSocketFromUserID: getSocketFromUserID,
   getUserFromSocketID: getUserFromSocketID,
   getAllConnectedUsers: getAllConnectedUsers,
-
+  addUserToGame: addUserToGame,
+  removeUserFromGame: removeUserFromGame,
   getIo: () => io,
 };

@@ -4,7 +4,7 @@ import Chat from "../modules/Chat";
 import ChatList from "../modules/ChatList";
 import { get } from "../../utilities";
 import { useOutletContext } from "react-router-dom";
-import { socket } from "../../socket-client";
+import { socket } from "../../socket-client.ts";
 
 import "./Chatbook.css";
 

@@ -9,6 +9,12 @@
   vertical-align: middle;
 }
 
+.NavBar-title-red {
+  color: #ffa4a4;
+  font-size: 20px;
+  vertical-align: middle;
+}
+
 .NavBar-linkContainer {
   margin-left: var(--l);
 }

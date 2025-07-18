@@ -18,14 +18,22 @@ const drawPlayer = (context: any, x: number, y: number, radius: number, color: s
   fillCircle(context, drawX, drawY, radius, color);
 }
 
-type state = {
-  players: {
-    [id: string]: {
+const drawCircle = (context: any, x: number, y: number, radius: number, color: string) => {
+  const { drawX, drawY } = convertCoord(x, y);
+  fillCircle(context, drawX, drawY, radius, color);
+};
+
+type circle = {
       position: {x: number, y: number},
       radius: number,
       color: string,
-    }
-  }
+}
+
+type state = {
+  players: {
+    [id: string]: circle,
+  },
+  food: circle[],
 }
 
 export const drawCanvas = (drawState: state, convasRef:any) => {
@@ -39,7 +47,9 @@ export const drawCanvas = (drawState: state, convasRef:any) => {
 
   Object.values(drawState.players).forEach((p) => {
     drawPlayer(context, p.position.x, p.position.y, p.radius, p.color);
-    // context.fillStyle = drawState.players[p].color;
-    // context.fillCircle(drawState.players[p].position.x, drawState.players[p].position.x, drawState.players[p].radius)
+  })
+
+  Object.values(drawState.food).forEach((f) => {
+    drawCircle(context, f.position.x, f.position.y, f.radius, f.color);
   })
 };
