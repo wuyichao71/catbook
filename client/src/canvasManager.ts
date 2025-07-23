@@ -1,6 +1,35 @@
 let canvas: any;
 
+type spritesType = {
+  red: HTMLImageElement | null;
+  blue: HTMLImageElement | null;
+  green: HTMLImageElement | null;
+  yellow: HTMLImageElement | null;
+  purple: HTMLImageElement | null;
+  orange: HTMLImageElement | null;
+  silver: HTMLImageElement | null;
+}
+let sprites: spritesType = {
+  red: null,
+  blue: null,
+  green: null,
+  yellow: null,
+  purple: null,
+  orange: null,
+  silver: null,
+}
+
+// type spritesKey = keyof spritesType;
+
+Object.keys(sprites).forEach((key: string) => {
+  const color = key as keyof spritesType;
+  sprites[color] = new Image(400, 400);
+  sprites[color].src = `./player-icons/${key}.png`
+
+})
+
 const convertCoord = (x: number, y: number) => {
+  if (!canvas) return;
   return {
     drawX: x, drawY: canvas.height - y,
   }
@@ -8,7 +37,7 @@ const convertCoord = (x: number, y: number) => {
 
 const fillCircle = (context: any, x: number, y: number, radius: number, color: string) => {
   context.beginPath();
-  context.arc(x, y, radius, 0, radius * 2 * Math.PI, false);
+  context.arc(x, y, radius, 0, 2 * Math.PI, false);
   context.fillStyle = color;
   context.fill();
 }
