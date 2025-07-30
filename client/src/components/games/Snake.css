@@ -1,0 +1,91 @@
+.Snake-gameBoard {
+  background-color: black;
+  width: 400px;
+  height: 400px;
+  display: grid;
+  grid-template-rows: repeat(21, 1fr);
+  grid-template-columns: repeat(21, 1fr);
+  /* border: 5pt solid green; */
+  margin: 0 auto;
+}
+
+.Snake-snake {
+  background-color: lime;
+  border: 1px solid black;
+}
+
+.Snake-food {
+  background-color: red;
+  border-radius: 50%; 
+}
+
+.Snake-menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Snake-input, .Snake-button {
+  font-family: "Open Sans";
+  font-size: 16px;
+  padding: var(--s) var(--s);
+}
+
+.Snake-input {
+  border: var(--darkgrey) 1px solid;
+  border-radius: var(--xs) 0 0 var(--xs);
+  transition: box-shadow 0.1s;
+  width: 64px;
+}
+
+.Snake-input:focus-within {
+  border-color: var(--primary--dim);
+  box-shadow: 0 0 0 var(--xs) rgba(0, 123, 255, 0.25);
+}
+
+.Snake-button {
+  color: var(--primary);
+  border: var(--primary) 1px solid;
+  border-radius: 0 var(--xs) var(--xs) 0;
+  background: none;
+  transition: color 0.1s, background 0.1s;
+  cursor: pointer;
+}
+
+.Snake-button:hover {
+  color: var(--white);
+  background-color: var(--primary);
+}
+
+.Snake-menuPrompt {
+  color: black;
+  text-align: center;
+  font-weight: bold;
+}
+
+.Snake-finished {
+  position: absolute;
+  color: white;
+  top:50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #333333;
+  padding: 40px;
+  font-size: large;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.Snake-restartButton {
+  color: #ffffff;
+  border: #ffffff 1px solid;
+  border-radius: var(--xs);
+}
+
+.Snake-restartButton:hover {
+  color: var(--white);
+  background-color: #ababab;
+}

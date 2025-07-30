@@ -24,8 +24,7 @@ let sprites: spritesType = {
 Object.keys(sprites).forEach((key: string) => {
   const color = key as keyof spritesType;
   sprites[color] = new Image(400, 400);
-  sprites[color].src = `./player-icons/${key}.png`
-
+  sprites[color].src = `./player-icons/${key}.png`;
 })
 
 const convertCoord = (x: number, y: number) => {
@@ -35,21 +34,43 @@ const convertCoord = (x: number, y: number) => {
   }
 }
 
-const fillCircle = (context: any, x: number, y: number, radius: number, color: string) => {
+const fillCircle = (context: CanvasRenderingContext2D, x: number, y: number, radius: number, color: string) => {
   context.beginPath();
   context.arc(x, y, radius, 0, 2 * Math.PI, false);
   context.fillStyle = color;
   context.fill();
 }
 
-const drawPlayer = (context: any, x: number, y: number, radius: number, color: string) => {
-  const {drawX, drawY} = convertCoord(x, y);
-  fillCircle(context, drawX, drawY, radius, color);
+const drawSprite = (context: CanvasRenderingContext2D, x: number, y: number, radius: number, color: string) => {
+  const selectedColor = color as keyof spritesType;
+  const sprite = sprites[selectedColor];
+  if (sprite && sprite.complete && sprite.naturalHeight !== 0) {
+    context.save();
+    context.beginPath();
+    context.arc(x, y, radius, 0, 2 * Math.PI, false);
+    context.closePath();
+    context.clip();
+    context.drawImage(sprite, x - radius, y - radius, radius * 2, radius * 2);
+    context.restore();
+  } else {
+    console.error(`Sprite ${color} is not loaded yet.`);
+  }
 }
 
-const drawCircle = (context: any, x: number, y: number, radius: number, color: string) => {
-  const { drawX, drawY } = convertCoord(x, y);
-  fillCircle(context, drawX, drawY, radius, color);
+const drawPlayer = (context: CanvasRenderingContext2D, x: number, y: number, radius: number, color: string) => {
+  const coord = convertCoord(x, y);
+  if(coord) {
+    const {drawX, drawY} = coord;
+    drawSprite(context, drawX, drawY, radius, color);
+  }
+}
+
+const drawCircle = (context: CanvasRenderingContext2D, x: number, y: number, radius: number, color: string) => {
+  const coord = convertCoord(x, y);
+  if (coord) {
+    const { drawX, drawY } = coord;
+    fillCircle(context, drawX, drawY, radius, color);
+  }
 };
 
 type circle = {

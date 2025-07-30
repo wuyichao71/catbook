@@ -17,7 +17,11 @@ const sendGameState = () => {
 const startRunningGame = () => {
   setInterval(() => {
     gameLogic.updateGameState();
+    // console.log("interval: ", gameLogic.gameState.winner, gameLogic.gameState.players);
+    // console.log("----------------------------");
     sendGameState();
+    // console.log("interval: ", gameLogic.gameState.winner, gameLogic.gameState.players);
+    // console.log("----------------------------");
   }, 1000 / 60);
 };
 

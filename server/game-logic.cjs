@@ -109,15 +109,6 @@ const movePlayer = (id, dir) => {
   if (gameState.players[id] == undefined) {
     return;
   }
-  // if ("up" === dir) {
-  //   gameState.players[id].position.y += 10;
-  // } else if ("down" === dir) {
-  //   gameState.players[id].position.y -= 10;
-  // } else if ("left" === dir) {
-  //   gameState.players[id].position.x -= 10;
-  // } else if ("right" === dir) {
-  //   gameState.players[id].position.x += 10;
-  // }
 
   const desiredPosition = { ...gameState.players[id].position };
 
@@ -154,6 +145,7 @@ const checkEnoughFoods = () => {
 };
 
 const checkWin = () => {
+  // console.log("checkWin begin: ", gameState.winner, gameState.players);
   const winners = Object.keys(gameState.players).filter((key) => {
     const player = gameState.players[key];
     if (player.radius > MAX_PLAYER_SIZE) {
@@ -161,19 +153,26 @@ const checkWin = () => {
     }
   });
 
+  // console.log("checkWin middle: ", gameState.winner, gameState.players);
+  // console.log(winners);
+
   if (winners.length === 1) {
     gameState.winner = winners[0];
     Object.keys(gameState.players).forEach((key) => {
       removePlayer(key);
     });
   }
+  // console.log("checkWin end: ", gameState.winner, gameState.players);
 };
 
 const updateGameState = () => {
+  // console.log("-----------------");
+  // console.log("update begin: ", gameState.winner, gameState.players);
   checkWin();
   computePlayersEatPlayers();
   computePlayersEatFoods();
   checkEnoughFoods();
+  // console.log("update end: ", gameState.winner, gameState.players);
 };
 
 const removePlayer = (id) => {

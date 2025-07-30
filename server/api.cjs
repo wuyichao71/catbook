@@ -127,8 +127,10 @@ router.post("/initsocket", (req, res) => {
 router.post("/spawn", (req, res) => {
   gameLogic.gameState.winner = null;
   if (req.user) {
+    // socketManager.removeUserFromGame(req.user);
     socketManager.addUserToGame(req.user);
   }
+  // console.log(gameLogic.gameState);
   res.send({});
 });
 

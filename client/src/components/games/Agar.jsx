@@ -17,7 +17,7 @@ const Agar = () => {
       window.removeEventListener("keydown", handleInput);
       post("/api/despawn", { userId: userId });
     };
-  });
+  }, []);
   useEffect(() => {
     socket.on("update", processUpdate);
     return () => {
@@ -33,6 +33,7 @@ const Agar = () => {
     } else {
       setWinnerModal(null);
     }
+    // console.log(update);
     drawCanvas(update, canvasRef);
   };
 

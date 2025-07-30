@@ -9,6 +9,7 @@ import Chatbook from "./components/pages/Chatbook.jsx";
 import Game from "./components/pages/Game.jsx";
 import Agar from "./components/games/Agar.jsx";
 import Snake from "./components/games/Snake.jsx";
+import CanvasSnake from "./components/games/CanvasSnake.jsx";
 // import { BASE } from "./utilities";
 // TODO (step5): uncomment the following imports from react-router-dom
 // import {
@@ -39,6 +40,7 @@ const router = createBrowserRouter(
       <Route path="game/" element={<Game />}>
         <Route path="agar.io/" element={<Agar />} />
         <Route path="snake/" element={<Snake />} />
+        <Route path="CanvasSnake/" element={<CanvasSnake />} />
       </Route>
     </Route>
   ),
