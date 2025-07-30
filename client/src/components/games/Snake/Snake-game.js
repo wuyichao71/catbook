@@ -120,8 +120,8 @@ export const initGame = (size) => {
   snakeBody = initializeSnakeBody();
   food = initializeFood();
   blockSize = canvas.width / size;
+  setGridSize(size);
   drawCanvas();
-  // console.log(snakeBody[0]);
 };
 
 const drawCanvas = () => {
